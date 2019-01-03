@@ -1,0 +1,15 @@
+- name: Software Engineer Keywords
+  keywords:
+      - Python
+      - Java
+      - C++
+      - Design Patterns
+
+# - name: Mobile Developer Keywords
+#   keywords:
+#       - Android
+#       - Reverse Engineering
+
+- name: Linux Developer Keywords
+  keywords:
+        - None
