@@ -8,7 +8,7 @@ menu: 关于
 permalink: /about/
 ---
 
-我是Light，码而生，码而立。
+我是Light，技艺不精。
 
 仰慕「优雅编码的艺术」。
 
