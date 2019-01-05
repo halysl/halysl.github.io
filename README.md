@@ -1,6 +1,6 @@
-# 码志
+# A/B
 
-我的个人博客：<https://mazhuang.org>，欢迎 Star 和 Fork。
+我的个人博客：<https://halysl.github.io/>，欢迎 Star 和 Fork。
 
 ## 概览
 
@@ -16,9 +16,9 @@
 
 ## 效果预览
 
-**[在线预览 &rarr;](https://mazhuang.org)**
+**[在线预览 &rarr;](https://halysl.github.io/)**
 
-![screenshot home](https://mazhuang.org/assets/images/screenshots/home.png)
+![screenshot home](https://halysl.github.io/assets/images/screenshots/home.jpg)
 
 ## Fork 指南
 
