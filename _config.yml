@@ -3,7 +3,7 @@
 #   Main Configs   #
 # ---------------- #
 baseurl:
-url: https://halysl.github.io/
+url: https://halysl.github.io
 date_format: "ordinal"
 title: A/B
 subtitle: "我永远喜欢桥本环奈"
