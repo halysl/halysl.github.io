@@ -94,11 +94,6 @@ $GLIBC_DIR/ld-2.17.so --library-path $GLIBC_DIR:/lib64:$LD_LIBRARY_PATH <command
 假设此时执行python会报错，
 `ImportError: cannot import name md5`，这是因为--library-path范围不够广，查找下对应的openssl在哪里，添加到--library-path参数就行了。
 
-
-/tmp/QDataReport/.lib/glibc-2.14/lib/ld-2.17.so --library-path /tmp/QDataReport/.lib/glibc-2.14/lib:/lib64:/usr/lib64:$LD_LIBRARY_PATH /tmp/QDataReport/.venv/bin/python
-
-
-
 ### 参考链接:
 
   - [制作python虚拟环境包](https://seekplum.github.io/virtualenv/)
