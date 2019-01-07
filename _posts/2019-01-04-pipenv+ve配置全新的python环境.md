@@ -27,7 +27,7 @@ keywords: python, pipenv, linux
 
 可以通过查看虚拟环境中的lib目录得知指向的位置，
 
-![](../images/blog/virtual_env_ref_to_system_env.png)
+![](http://pkxuy5e31.bkt.clouddn.com/virtual_env_ref_to_system_env.png)
 
 所以在创建虚拟环境前需要创建完整的python环境。
 
@@ -50,7 +50,7 @@ keywords: python, pipenv, linux
 由于那篇博客关于安装虚拟环境说得足够详细，所以这里不再赘述，请直接看[制作python虚拟环境包](https://seekplum.github.io/virtualenv/)的`虚拟环境操作`进行操作，一般情况下会安装的特别快，如果出现了`ImportError: No module named zlib`那就是缺少zlib环境。
 
 还记得前文提到的，“虚拟环境中的很多.py文件都只是软连接指向系统自带的python环境对应的.py文件”，此时我们再去看下虚拟环境的lib目录，可以看出虽然有指向，但指向的是之前安装的完整环境，所以理论上可以在任何Linux环境上使用。
-![](../images/blog/virtual_venv_ref_to_now_dir.png)
+![](http://pkxuy5e31.bkt.clouddn.com/virtual_venv_ref_to_now_dir.png)
 
 ### 打包glibc环境
 
