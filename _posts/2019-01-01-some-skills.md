@@ -13,6 +13,7 @@ keywords: keyword1, keyword2
 ## Linux方面
 
 ### 设置dns
+
 ```shell
 echo 'nameserver 114.114.114.114' >> /etc/resolv.conf
 service network restart
@@ -20,29 +21,34 @@ ping smtp.163.com
 ```
 
 ###  类似于Windows下的tree指令
+
 ```shell
 find . -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'
 ```
 
 ### 杀死多进程
+
 ```shell
 # 主要是xargs的使用
 ps -aux|grep $keyword|grep -v grep | awk '{print $2}' | xargs kill -9
 ```
 
 ### 查看指定端口状态
+
 ```shell
 lsof -i:port
 netstat -anp|grep port
 ```
 
 ### 统计字符出现的次数
+
 ```shell
 grep -o objStr  filename|wc -l
 grep -o 'objStr1\|objStr2'  filename|wc -l
 ```
 
 ### 统计文件夹下的文件数目
+
 ```shell
 # 统计当前目录下文件的个数（不包括目录）
 ls -l | grep "^-" | wc -l
@@ -51,13 +57,36 @@ ls -lR| grep "^-" | wc -l
 # 查看某目录下文件夹(目录)的个数（包括子目录）
 ls -lR | grep "^d" | wc -l
 ```
+
 ### 查找文件内容
-```python
+
+```shell
 # 查找某文件中的xxx
 grep 'xxx'  filename
 # 查找当前文件夹中的所有文件中的xxx
 find . |xargs grep 'xxx'
 ```
+
+### 获取终端宽度
+
+```shell
+$ echo $LINES  # 查看终端的高度
+$ echo $COLUMNS  # 查看终端的宽度
+$ tput lines  # 查看终端的高度
+$ tput cols  # 查看终端的宽度
+$ stty size  # 同时返回高度和宽度
+$ resize [-cu][-s <列数> <行数>]
+## -c 　就算用户环境并非C Shell，也用C Shell指令改变视窗大小。
+## -s <列数> <行数> 　设置终端机视窗的垂直高度和水平宽度。
+## -u 　就算用户环境并非Bourne Shell，也用Bourne Shell指令改变视窗大小。
+```
+
+```python
+>>> import shutil
+>>> res = shutil.get_terminal_size()
+>>> print(res.lines, res.columns)  # 输出终端的高度和宽度
+```
+
 ## vi
 [vi块操作](https://blog.csdn.net/sinat_36053757/article/details/78183506)
 ### 多行选中并在开头加字符
