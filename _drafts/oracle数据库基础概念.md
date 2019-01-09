@@ -1,0 +1,10 @@
+11g
+12c
+
+noneCDB
+CDB
+PDB
+
+RAC
+ASM
+实例
