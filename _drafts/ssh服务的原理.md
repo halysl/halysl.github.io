@@ -1,4 +1,12 @@
-# ssh服务介绍及使用
+ssh相关文件夹以及使用
+http://daemon369.github.io/ssh/2015/03/21/using-ssh-config-file
+http://daemon369.github.io/ssh/2015/03/16/01-brief-introduction-for-ssh
+http://daemon369.github.io/ssh/2015/03/08/generating-ssh-keys
+
+# ssh服务的原理
+
+读者大可以直接就自己的问题去Google解决方案，但是不理解这个过程，那么每次遇到都要去search，自己只是‘工具人’，遇到了问题也不知道如何是好。这时候需要看下原理，有原理做基础，才能理解做配置的每一步的意义。
+
 
 ## 简介
 ssh 是个非常通用的服务，但凡用过 Linux 系统的人就不会没使用过这个工具。
