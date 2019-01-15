@@ -545,3 +545,10 @@ open /System/Library/Frameworks/Tk.framework/Versions/Current/Resources/
 打开 retinizer，将 Wish.app 拖到 retinizer 的界面。
 
 参考：[起底Git-Git基础](http://yanhaijing.com/git/2017/02/09/deep-git-4/)
+
+
+### 更新本地所有分支
+
+```sh
+git branch | awk 'BEGIN{print "echo ****Update all local branch...@daimon***"}{if($1=="*"){current=substr($0,3)};print a"git checkout "substr($0,3);print "git pull --all";}END{print "git checkout " current}' |sh
+```
