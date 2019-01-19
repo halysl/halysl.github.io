@@ -53,3 +53,5 @@ apidoc -i myapp/ -o apidoc/
 生成好了，就可以打开apidoc/文件夹下的index.html就可以了。
 
 ## 开始写注释
+
+没错，api doc指的就是在注释中以特定约定写api的文件，这样就可以写出简单、易于维护的文档。
