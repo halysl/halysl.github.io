@@ -55,3 +55,158 @@ apidoc -i myapp/ -o apidoc/
 ## 开始写注释
 
 没错，api doc指的就是在注释中以特定约定写api的文件，这样就可以写出简单、易于维护的文档。
+
+至于注释该怎么写，最好的方法是查看官网example。
+
+### 代码注释
+
+#### @api
+@api 标签是必填的，只有使用 @api 标签的注释块才会被解析生成文档内容。格式如下：
+
+```
+@api {method} path [title]
+```
+
+这里，有必要对参数内容进行讲解。
+
+参数名|	描述
+:---------------|-----
+method			|请求方法, 如 POST，GET，POST，PUT，DELETE 等。
+path			|请求路径。
+title[选填]	|简单的描述
+
+
+#### @apiDescription
+@apiDescription 对 API 接口进行描述。格式如下：
+
+```@apiDescription text```
+
+#### @apiGroup
+
+@apiGroup 表示分组名称，它会被解析成一级导航栏菜单。格式如下：
+
+```
+@apiGroup name
+```
+
+#### @apiName
+
+@apiName 表示接口名称。注意的是，在同一个 @apiGroup 下，名称相同的 @api 通过 @apiVersion 区分，否者后面 @api 会覆盖前面定义的 @api。格式如下：
+
+```
+@apiName name
+```
+
+#### @apiVersion
+
+@apiVersion 表示接口的版本，和 @apiName 一起使用。格式如下：
+
+```
+@apiVersion version
+```
+
+#### @apiParam
+@apiParam 定义 API 接口需要的请求参数。格式如下：
+
+```
+@apiParam [(group)] [{type}] [field=defaultValue] [description]
+```
+
+这里，有必要对参数内容进行讲解。
+
+参数名|	描述
+:---------------|------------
+(group)					|参数进行分组
+{type}[选填]				|参数类型，包括{Boolean}, {Number}, {String}, {Object}, {String[]}， (array of strings), ...
+{type{size}}[选填]		|可以声明参数范围，例如{string{..5}}， {string{2..5}}， {number{100-999}}
+{type=allowedValues}[选填]|	可以声明参数允许的枚举值，例如{string="small","huge"}， {number=1,2,3,99}
+field						|参数名称
+[field]					|声明该参数可选
+=defaultValue[选填]		|声明该参数默认值
+description[选填]			|声明该参数描述
+
+
+类似的用法，还有 @apiHeader 定义 API 接口需要的请求头，@apiSuccess 定义 API 接口需要的响应成功，@apiError 定义了 API 接口需要的响应错误。
+
+这里，我们看一个案例。
+
+```
+"""
+@apiParam  {Integer} edition=1   平台类型
+@apiParam  {String} [tenantCode] 商家名称
+"""
+```
+
+此外，还有 @apiParamExample，@apiHeaderExample，@apiErrorExample，@apiSuccessExample 可以用来在文档中提供相关示例。
+
+#### @apiPermission
+
+@apiPermission 定义 API 接口需要的权限点。格式如下：
+
+```
+@apiPermission name
+```
+
+此外，还有一些特别的注解。例如 @apiDeprecated 表示这个 API 接口已经废弃，@apiIgnore 表示忽略这个接口的解析。关于更多的使用细节，可以阅读官方文档：http://apidocjs.com/#demo
+
+完整的案例
+最后，我们用官方的案例，讲解下一个完整的配置。
+
+首先，配置 apidoc.json，内容如下：
+
+```json
+{
+  "name": "example",
+  "version": "0.1.0",
+  "description": "A basic apiDoc example"
+}
+```
+
+
+```
+"""
+@api {get} search/rac 查询Rac信息
+            @apiVersion 1.0.0
+            @apiGroup cluster
+            @apiPermission admin
+            @apiDescription 查询已经配置好的RAC信息
+
+            @apiParam {int} cluster_id 集群id
+
+            @apiSuccess {string} grid_home GI HOME
+            @apiSuccess {string} grid_user Grid用户
+            @apiSuccess {string} oracle_home DB HOME
+            @apiSuccess {string} oracle_user Oracle用户
+            @apiSuccess {string} asm_user asm用户名
+            @apiSuccess {string} db_user db用户名
+            @apiSuccess {int} scan_port 监听端口
+
+            @apiSuccessExample {json} Success-Response
+            [
+                {
+                    "rac_id": 1,
+                    "rac_name": "rac1",
+                    "grid_home": "/opt/grid/products/11.2.0",
+                    "grid_user": "grid",
+                    "oracle_home": "/opt/oracle/products/11.2.0",
+                    "oracle_user": "oracle",
+                    "asm_user": "ASMSNMP",
+                    "db_user": "DBSNMP",
+                    "scan_port": 1521,
+                }
+            ]
+"""
+```
+然后，执行命名生成文档。
+
+apidoc -i myapp/ -o apidoc/
+
+生成的页面，如下所示。
+
+![](http://pkxuy5e31.bkt.clouddn.com/apidoc_eaxmple.png)
+
+### 相关链接
+
+- [APIDOC Inline Documentation for RESTful web APIs](http://apidocjs.com/)
+- [使用apiDoc书写API文档规范](https://juejin.im/post/5a61f44bf265da3e27453fda#heading-6)
+- [Web API 文档生成工具 apidoc](https://juejin.im/post/5a6684e3518825732646eef8)
