@@ -1,0 +1,41 @@
+select account_status,username from dba_users where username='DBSNMP';
+select * from all_users where username='ysas';
+
+ALTER USER DBSNMP identified by DBSNMP ACCOUNT UNLOCK;
+
+grant connect,resource,select_catalog_role to DBSNMP;
+grant unlimited tablespace to DBSNMP;
+grant select any dictionary to DBSNMP;
+grant execute on DBMS_WORKLOAD_REPOSITORY to DBSNMP;
+
+
+su - {user} -c \"{env}\nsqlplus / as sysdba <<EOF\nset pagesize 200\nset linesize 9999\nset heading off\n{sql}\nexit\nEOF\"
+
+su - oracle -c """export ORACLE_SID=rac1
+sqlplus / as sysdba <<EOF
+set pagesize 200
+set linesize 9999
+set heading off
+select account_status,username from dba_users where username='DBSNMP';
+exit
+EOF"""
+
+su - oracle -c "export ORACLE_SID=rac1
+sqlplus / as sysdba <<EOF
+set pagesize 200;
+set linesize 9999;
+set heading off;
+select account_status,username from dba_users where username='DBSNMP';
+exit
+EOF"
+
+select * from dba_users where username='qwer';
+create user qwer identified by qwer default tablespace users;
+ALTER USER qwer identified by qwer ACCOUNT UNLOCK;
+
+grant connect,resource,select_catalog_role to qwer;
+grant unlimited tablespace to qwer;
+grant select any dictionary to qwer;
+grant execute on DBMS_WORKLOAD_REPOSITORY to qwer;
+
+select * from all_users where username='qwer';
