@@ -3,7 +3,7 @@ layout: post
 title: 【转】Linux 之三剑客，awk、sed、grep的用法
 categories: [Linux, awk, sed, grep]
 description: Linux 下的字符处理
-keywords: Linux，awk，sed，grep
+keywords: Linux, awk, sed, grep
 ---
 
 #【转】Linux 之三剑客，awk、sed、grep的用法

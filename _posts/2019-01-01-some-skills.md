@@ -3,7 +3,7 @@ layout: post
 title: 一些技巧
 categories: [linux, python]
 description: some word here
-keywords: keyword1, keyword2
+keywords: linux, python, skill
 ---
 
 # 一些技巧
