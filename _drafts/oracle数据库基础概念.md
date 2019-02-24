@@ -5,6 +5,6 @@ noneCDB
 CDB
 PDB
 
-RAC
+RAC -- grid
 ASM
 实例
