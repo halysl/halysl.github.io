@@ -122,6 +122,23 @@ for root, dir, files in os.walk(os.getcwd()):
 tar.close()
 ```
 
+## shell
+
+### 显示执行过程
+
+方法一：
+
+```shell
+#!/bin/sh下增加一行
+set -x
+```
+
+方法二：以下面的方式执行脚本
+
+```shell
+$ bash -x strtst.sh 
+```
+
 ## 杂项
 ### [base64加解密](https://www.bejson.com/enc/base64/)
 
