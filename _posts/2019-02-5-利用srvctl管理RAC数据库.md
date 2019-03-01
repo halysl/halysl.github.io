@@ -84,7 +84,7 @@ ONS daemon exists.
 Listener exists.
 ```
 
-- 显示指定节点的ASM实例配置：
+- 显示指定节点的 ASM 实例配置：
 
 ```shell
 [oracle@node-rac1 ~]$ srvctl config asm -n node-rac2        
@@ -93,7 +93,7 @@ Listener exists.
 
 ## 三、 启动/关闭实例（srvctl start/stop）17
 
-- 停止Oracle RAC所有服务：
+- 停止 Oracle RA C所有服务：
 
 ```shell
 [oracle@node-rac1 ~]$ emctl stop dbconsole
@@ -108,7 +108,7 @@ Listener exists.
 [oracle@node-rac1 ~]$srvctl stop database -d racdb
 ```
 
-- 启动Oracle RAC所有服务：
+- 启动 Oracle RAC 所有服务：
 
 ```shell
 [oracle@node-rac1 ~]$ srvctl start nodeapps -n node-rac1
@@ -164,3 +164,10 @@ Remove service test from the instance racdb2? (y/[n]) y
 [oracle@node-rac1 ~]$ srvctl start service -d racdb -s test           
 [oracle@node-rac1 ~]$ srvctl modify service -d racdb -s test -i racdb2 –r
 ```
+
+## 转载信息
+
+- 作者：南非蚂蚁 
+- 来源：51CTO
+- 原文：https://blog.51cto.com/ixdba/970802
+- 版权声明：本文为博主原创文章，转载请附上博文链接！
