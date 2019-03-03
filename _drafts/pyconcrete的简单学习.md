@@ -25,3 +25,89 @@ $ pip install pyconcrete --egg --install-option="--passphrase=<your passphrase>"
 and execute decrypted data (as .pyc content)
 encrypt & decrypt secret key record in _pyconcrete.pyd (like DLL or SO) the secret key would be hide in binary code, can't see it directly in HEX view
 pyconcrete-admin.py compile --source=[] --pye
+
+
+Encryption
+only support AES 128 bit now
+encrypt & decrypt by library OpenAES
+Installation
+need to input your passphrase create secret key for encrypt python script.
+same passphrase will generate the same secret key
+installation will add pyconcrete.pth into your site-packages for execute sitecustomize.py under pyconcrete which will automatic import pyconcrete
+pip
+$ pip install pyconcrete
+If you only execute pip install will not display any prompt(via stdout) from pyconcrete. Installation will be blocked and waiting for user input passphrase twice. You must input passphrase for installation continuously.
+
+$ pip install pyconcrete --egg --install-option="--passphrase=<your passphrase>"
+pyconcrete installed as egg, if you want to uninstall pyconcrete will need to manually delete pyconcrete.pth.
+
+source
+get the pyconcrete source code
+$ git clone <pyconcrete repo> <pyconcre dir>
+install pyconcrete
+$ python setup.py install
+Usage
+Full encrypted
+convert all of your .py to *.pye
+$ pyconcrete-admin.py compile --source=<your py script>  --pye
+$ pyconcrete-admin.py compile --source=<your py module dir> --pye
+remove *.py *.pyc or copy *.pye to other folder
+main.py encrypted as main.pye, it can't be executed by normal python. You must use pyconcrete to process the main.pye script. pyconcrete(exe) will be installed in your system path (ex: /usr/local/bin)
+pyconcrete main.pye
+src/*.pye  # your libs
+Partial encrypted (pyconcrete as lib)
+download pyconcrete source and install by setup.py
+$ python setup.py install \
+  --install-lib=<your project path> \
+  --install-scripts=<where you want to execute pyconcrete-admin.py and pyconcrete(exe)>
+import pyconcrete in your main script
+recommendation project layout
+main.py       # import pyconcrete and your lib
+pyconcrete/*  # put pyconcrete lib in project root, keep it as original files
+src/*.pye     # your libs
+Test
+test all case
+$ ./pyconcrete-admin.py test
+test all case, setup TEST_PYE_PERFORMANCE_COUNT env to reduce testing time
+$ TEST_PYE_PERFORMANCE_COUNT=1 ./pyconcrete-admin.py test
+Example
+Django with pyconcrete
+
+Building on Linux
+Python 3.7 - fix Ubuntu 14.04 build error
+x86_64-linux-gnu-gcc: error: unrecognized command line option `-fstack-protector-strong`
+Reference by Stackoverflow solution
+
+you should install gcc-4.9 first
+symlink /usr/bin/x86_64-linux-gnu-gcc to gcc-4.9
+build pycocnrete again
+rollback symlink
+Building on Windows
+Python 2.7 - Visual Studio 2008
+https://www.microsoft.com/en-us/download/details.aspx?id=44266
+
+Open VS2008 Command Prompt
+set DISTUTILS_USE_SDK=1
+set SET MSSdk=1
+create distutils.cfg and put inside
+[build]
+compiler=msvc
+Python 3.5, 3.6, 3.7 - Visual Studio 2015
+MSVC 2015 Build Tools
+
+Document
+
+make sure setuptools >= 24.0
+
+python -c 'import setuptools; print(setuptools.__version__)'
+Open VS2015 Build Tools Command Prompt
+
+set DISTUTILS_USE_SDK=1
+
+setenv /x64 /release or setenv /x86 /release
+
+Reference
+https://matthew-brett.github.io/pydagogue/python_msvc.html https://github.com/cython/cython/wiki/CythonExtensionsOnWindows
+
+Announcement
+pyconcrete is an experimental project, there is always a way to decrypt .pye files, but pyconcrete just make it harder.
