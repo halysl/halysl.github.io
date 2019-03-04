@@ -27,9 +27,11 @@ encrypt & decrypt secret key record in _pyconcrete.pyd (like DLL or SO) the secr
 pyconcrete-admin.py compile --source=[] --pye
 
 
-Encryption
-only support AES 128 bit now
-encrypt & decrypt by library OpenAES
+## 加密
+
+- 只支持 AES 128 位加密
+- 通过 OpenAES 加解密
+
 Installation
 need to input your passphrase create secret key for encrypt python script.
 same passphrase will generate the same secret key
