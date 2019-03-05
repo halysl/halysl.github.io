@@ -22,6 +22,8 @@ $ pip install pyconcrete --egg --install-option="--passphrase=<your passphrase>"
 - pyconcrete 将会自动和其他模块挂钩
 - 当 `your_script.py` 开始倒入其他模块，pyconcrete 首先会尝试寻找 `MODULE.pye`，然后通过 \_pyconcrete.pyd 对`MODULE.pye` 进行解密
 
+执行加密后的文件。
+
 and execute decrypted data (as .pyc content)
 encrypt & decrypt secret key record in _pyconcrete.pyd (like DLL or SO) the secret key would be hide in binary code, can't see it directly in HEX view
 pyconcrete-admin.py compile --source=[] --pye
