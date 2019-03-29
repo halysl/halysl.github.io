@@ -2,7 +2,7 @@
 layout: post
 title: 转载-利用srvctl管理RAC数据库
 categories: [Oracle, RAC, srvctl]
-description: 不要在你的代码里出现User，这会使代码混乱
+description: 
 keywords: Oracle, 转载， RAC
 ---
 
