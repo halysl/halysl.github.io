@@ -603,3 +603,652 @@ fi
 文件不为空
 文件存在
 ```
+
+### 流程控制
+
+#### if...else...
+
+if...
+
+```shell
+if condition
+then
+    command1 
+    command2
+    ...
+    commandN 
+fi
+```
+
+单行 if...
+
+```shell
+if [ $(ps -ef | grep -c "ssh") -gt 1 ]; then echo "true"; fi
+```
+
+if...else...
+
+```shell
+if condition
+then
+    command1 
+    command2
+    ...
+    commandN
+else
+    command
+fi
+```
+
+if...else-if...else...
+
+```shell
+if condition1
+then
+    command1
+elif condition2 
+then 
+    command2
+else
+    commandN
+fi
+```
+
+#### for
+
+```shell
+for var in item1 item2 ... itemN
+do
+    command1
+    command2
+    ...
+    commandN
+done
+```
+
+单行 for
+
+```shell
+for var in item1 item2 ... itemN; do command1; command2… done;
+```
+
+```shell
+for loop in 1 2 3 4 5; do echo "The value is: $loop"; done
+
+The value is: 1
+The value is: 2
+The value is: 3
+The value is: 4
+The value is: 5
+```
+
+#### while
+
+```shell
+while condition
+do
+    command
+done
+```
+
+```shell
+#!/bin/bash
+int=1
+while(( $int<=5 ))
+do
+    echo $int
+    let "int++"
+done
+```
+
+```shell
+1
+2
+3
+4
+5
+```
+
+#### until
+
+until 循环执行一系列命令直至条件为 true 时停止。
+
+until 循环与 while 循环在处理方式上刚好相反。
+
+```shell
+until condition
+do
+    command
+done
+```
+
+```shell
+#!/bin/bash
+
+a=0
+
+until [ ! $a -lt 10 ]
+do
+   echo $a
+   a=`expr $a + 1`
+done
+```
+
+```shell
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+```
+
+#### case
+
+Shell case语句为多选择语句。可以用case语句匹配一个值与一个模式，如果匹配成功，执行相匹配的命令。
+
+```shell
+case 值 in
+模式1)
+    command1
+    command2
+    ...
+    commandN
+    ;;
+模式2）
+    command1
+    command2
+    ...
+    commandN
+    ;;
+esac
+```
+
+```shell
+echo '输入 1 到 4 之间的数字:'
+echo '你输入的数字为:'
+read aNum
+case $aNum in
+    1)  echo '你选择了 1'
+    ;;
+    2)  echo '你选择了 2'
+    ;;
+    3)  echo '你选择了 3'
+    ;;
+    4)  echo '你选择了 4'
+    ;;
+    *)  echo '你没有输入 1 到 4 之间的数字'
+    ;;
+esac
+```
+
+#### break
+
+跳出所有循环。
+
+#### continue
+
+跳出当次循环。
+
+### 常用指令
+
+#### echo
+
+Shell 的 echo 指令与 PHP 的 echo 指令类似，都是用于字符串的输出。命令格式：
+
+```shell
+echo string
+```
+
+您可以使用echo实现更复杂的输出格式控制。
+
+
+1. 显示普通字符串:
+
+``` echo "It is a test"```
+
+```echo It is a test```
+
+这里的双引号完全可以省略.
+
+2. 显示转义字符
+
+```echo "\"It is a test\""```
+
+结果将是:
+
+```"It is a test"```
+
+同样，双引号也可以省略。
+
+3. 显示变量
+
+read 命令从标准输入中读取一行,并把输入行的每个字段的值指定给 shell 变量
+
+```shell
+#!/bin/sh
+read name 
+echo "$name It is a test"
+```
+
+以上代码保存为 test.sh，name 接收标准输入的变量，结果将是:
+
+```
+[root@www ~]# sh test.sh
+OK                     #标准输入
+OK It is a test        #输出
+```
+
+4. 显示换行
+
+```shell
+#!/bin/sh
+echo -e "OK! \n" # -e 开启转义
+echo "It is a test"
+```
+
+输出结果：
+
+```shell
+OK!
+
+It is a test
+```
+
+5. 显示不换行
+
+```shell
+#!/bin/sh
+echo -e "OK! \c" # \c 不换行
+echo "It is a test"
+```
+
+输出结果：
+
+```shell
+OK! It is a test
+```
+
+6. 显示结果定向至文件
+
+```echo "It is a test" > myfile```
+
+7. 原样输出字符串，不进行转义或取变量(用单引号)
+
+```echo '$name\"'```
+
+输出结果：
+
+```$name\"```
+
+8. 显示命令执行结果
+
+```shell
+echo `date`
+```
+
+注意： 这里使用的是反引号 `, 而不是单引号 '。
+
+结果将显示当前日期
+
+`Tue Mar 26 19:54:16 CST 2019`
+
+#### printf
+
+shell 里的 printf 类似于 C 语言里的 print 方法，可以格式化字符。
+
+```shell
+printf  format-string  [arguments...]
+```
+
+例子：
+
+```shell
+printf "%-10s %-8s %-4s\n" 姓名 性别 体重kg  
+printf "%-10s %-8s %-4.2f\n" 郭靖 男 66.1234 
+printf "%-10s %-8s %-4.2f\n" 杨过 男 48.6543 
+printf "%-10s %-8s %-4.2f\n" 郭芙 女 47.9876 
+```
+
+```shell
+姓名     性别   体重kg
+郭靖     男      66.12
+杨过     男      48.65
+郭芙     女      47.99
+```
+
+转译序列：
+
+|序列|说明|
+|---|----|
+|\a|警告字符，通常为ASCII的BEL字符|
+|\b|后退|
+|\c|抑制（不显示）输出结果中任何结尾的换行字符（只在%b格式指示符控制下的参数字符串中有效），而且，任何留在参数里的字符、任何接下来的参数以及任何留在格式字符串中的字符，都被忽略|
+|\f|换页（formfeed）|
+|\n|换行|
+|\r|回车（Carriage return）|
+|\t|水平制表符|
+|\v|垂直制表符|
+|\\\\|一个字面上的反斜杠字符|
+|\ddd|表示1到3位数八进制值的字符。仅在格式字符串中有效|
+|\0ddd|表示1到3位的八进制值字符|
+
+#### test
+
+test 命令可以给出一个 bool 值。
+
+##### 数值测试
+
+|参数|说明|
+|---|----|
+|-eq|等于则为真		|
+|-ne|不等于则为真	|
+|-gt|大于则为真		|
+|-ge|大于等于则为真	|
+|-lt|小于则为真		|
+|-le|小于等于则为真	|
+
+```shell
+num1=100
+num2=100
+if test $[num1] -eq $[num2]
+then
+    echo '两个数相等！'
+else
+    echo '两个数不相等！'
+fi
+```
+
+```shell
+两个数相等！
+```
+
+##### 字符串测试
+
+|参数|说明|
+|---|----|
+|=	|等于则为真|
+|!=	|不相等则为真|
+|-z 字符串|字符串的长度为零则为真|
+|-n 字符串|字符串的长度不为零则为真|
+
+```shell
+num1="ru1noob"
+num2="runoob"
+if test $num1 = $num2
+then
+    echo '两个字符串相等!'
+else
+    echo '两个字符串不相等!'
+fi
+```
+
+```shell
+两个字符串不相等!
+```
+
+##### 文件测试
+
+`!重要`
+
+|参数		|说明|
+|----------|----|
+|-e 文件名	|如果文件存在则为真|
+|-r 文件名	|如果文件存在且可读则为真|
+|-w 文件名	|如果文件存在且可写则为真|
+|-x 文件名	|如果文件存在且可执行则为真|
+|-s 文件名	|如果文件存在且至少有一个字符则为真|
+|-d 文件名	|如果文件存在且为目录则为真|
+|-f 文件名	|如果文件存在且为普通文件则为真|
+|-c 文件名	|如果文件存在且为字符型特殊文件则为真|
+|-b 文件名	|如果文件存在且为块特殊文件则为真|
+
+```shell
+cd /bin
+if test -e ./bash
+then
+    echo '文件已存在!'
+else
+    echo '文件不存在!'
+fi
+```
+
+```shell
+文件已存在!
+```
+
+另外，Shell还提供了与( -a )、或( -o )、非( ! )三个逻辑操作符用于将测试条件连接起来，其优先级为："!"最高，"-a"次之，"-o"最低。例如：
+
+```shell
+cd /bin
+if test -e ./notFile -o -e ./bash
+then
+    echo '至少有一个文件存在!'
+else
+    echo '两个文件都不存在'
+fi
+```
+
+```
+至少有一个文件存在!
+```
+
+### 函数
+
+```shell
+[ function ] funname [()]{
+    action;
+
+    [return int;]
+}
+```
+
+- 可以带function fun() 定义，也可以直接fun() 定义,不带任何参数。
+- 参数返回，可以显示加：return 返回，如果不加，将以最后一条命令运行结果，作为返回值。 return后跟数值n(0-255)
+
+```shell
+demoFun(){
+    echo "这是我的第一个 shell 函数!"
+}
+echo "-----函数开始执行-----"
+demoFun
+echo "-----函数执行完毕-----"
+```
+
+```shell
+-----函数开始执行-----
+这是我的第一个 shell 函数!
+-----函数执行完毕-----
+```
+
+#### 函数参数
+
+在Shell中，调用函数时可以向其传递参数。在函数体内部，通过 $n 的形式来获取参数的值，例如，$1表示第一个参数，$2表示第二个参数...
+
+```shell
+funWithParam(){
+    echo "第一个参数为 $1 !"
+    echo "第二个参数为 $2 !"
+    echo "第十个参数为 $10 !"
+    echo "第十个参数为 ${10} !"
+    echo "第十一个参数为 ${11} !"
+    echo "参数总数有 $# 个!"
+    echo "作为一个字符串输出所有参数 $* !"
+}
+funWithParam 1 2 3 4 5 6 7 8 9 34 73
+```
+
+```shell
+第一个参数为 1 !
+第二个参数为 2 !
+第十个参数为 10 !
+第十个参数为 34 !
+第十一个参数为 73 !
+参数总数有 11 个!
+作为一个字符串输出所有参数 1 2 3 4 5 6 7 8 9 34 73 !
+```
+
+`$10 不能获取第十个参数，获取第十个参数需要${10}。当n>=10时，需要使用${n}来获取参数。`
+
+|参数处理|说明|
+|-------|----|
+|$#|传递到脚本的参数个数|
+|$*|以一个单字符串显示所有向脚本传递的参数|
+|$$|脚本运行的当前进程ID号|
+|$!|后台运行的最后一个进程的ID号|
+|$@|与$*相同，但是使用时加引号，并在引号中返回每个参数。|
+|$-|显示Shell使用的当前选项，与set命令功能相同。|
+|$?|显示最后命令的退出状态。0表示没有错误，其他任何值表明有错误。|
+
+### 输入/输出重定向
+
+大多数 UNIX 系统命令从你的终端接受输入并将所产生的输出发送回​​到您的终端。一个命令通常从一个叫标准输入的地方读取输入，默认情况下，这恰好是你的终端。同样，一个命令通常将其输出写入到标准输出，默认情况下，这也是你的终端。
+
+重定向命令列表如下：
+
+|命令|说明|
+|----|----|
+|command > file|将输出重定向到 file|
+|command < file|将输入重定向到 file|
+|command >> file|将输出以追加的方式重定向到 file|
+|n > file|将文件描述符为 n 的文件重定向到 file|
+|n >> file|将文件描述符为 n 的文件以追加的方式重定向到 file|
+|n >& m|将输出文件 m 和 n 合并|
+|n <& m|将输入文件 m 和 n 合并|
+|<< tag|将开始标记 tag 和结束标记 tag 之间的内容作为输入|
+
+#### 输出重定向
+
+重定向一般通过在命令间插入特定的符号来实现。特别的，这些符号的语法如下所示:
+
+`command1 > file1`
+
+上面这个命令执行command1然后将输出的内容存入file1。
+
+注意任何file1内的已经存在的内容将被新内容替代。如果要将新内容添加在文件末尾，请使用>>操作符。
+
+实例:
+
+执行下面的 who 命令，它将命令的完整的输出重定向在用户文件中(users):
+
+$ who > users
+执行后，并没有在终端输出信息，这是因为输出已被从默认的标准输出设备（终端）重定向到指定的文件。
+
+你可以使用 cat 命令查看文件内容：
+
+$ cat users
+light    console  Mar 19 13:56
+light    ttys000  Mar 19 13:56
+light    ttys002  Mar 19 13:56
+light    ttys003  Mar 19 13:56
+light    ttys004  Mar 19 13:56
+light    ttys005  Mar 22 18:07
+light    ttys007  Mar 26 16:54
+light    ttys009  Mar 27 10:56 
+
+#### 输入重定向
+
+和输出重定向一样，Unix 命令也可以从文件获取输入，语法为：
+
+`command1 < file1`
+
+这样，本来需要从键盘获取输入的命令会转移到文件读取内容。
+
+`注意：输出重定向是大于号(>)，输入重定向是小于号(<)。`
+
+实例:
+
+接着以上实例，我们需要统计 users 文件的行数,执行以下命令：
+
+```shell
+$ wc -l users
+        8 users
+$  wc -l < users
+        8 
+```
+
+注意：上面两个例子的结果不同：第一个例子，会输出文件名；第二个不会，因为它仅仅知道从标准输入读取内容。
+
+
+`command1 < infile > outfile`
+
+同时替换输入和输出，执行command1，从文件infile读取内容，然后将输出写入到outfile中。
+
+#### 重定向更多细节
+
+一般情况下，每个 Unix/Linux 命令运行时都会打开三个文件：
+
+- 标准输入文件(stdin)：stdin的文件描述符为0，Unix程序默认从stdin读取数据。
+- 标准输出文件(stdout)：stdout 的文件描述符为1，Unix程序默认向stdout输出数据。
+- 标准错误文件(stderr)：stderr的文件描述符为2，Unix程序会向stderr流中写入错误信息。
+
+`管道 (“|”, pipe line)，把上一个命令的 stdout 接到下一个命令的 stdin;`
+
+默认情况下，command > file 将 stdout 重定向到 file，command < file 将stdin 重定向到 file。
+
+```shell
+# 如果希望 stderr 重定向到 file，可以这样写：
+`$ command 2 > file`
+
+# 如果希望 stderr 追加到 file 文件末尾，可以这样写(2 表示标准错误文件(stderr))：
+$ command 2 >> file
+
+# 如果希望将 stdout 和 stderr 合并后重定向到 file，可以这样写：
+$ command > file 2>&1
+
+# 如果希望对 stdin 和 stdout 都重定向，可以这样写:
+$ command >> file 2>&1
+
+# command 命令将 stdin 重定向到 file1，将 stdout 重定向到 file2:
+$ command < file1 >file2
+```
+
+#### Here Document
+
+```shell
+command << delimiter
+    document
+delimiter
+```
+
+结尾的delimiter 一定要顶格写，前面不能有任何字符，后面也不能有任何字符，包括空格和 tab 缩进。
+开始的delimiter前后的空格会被忽略掉。
+
+实例：
+
+```shell
+$ wc -l << EOF
+    t1
+    t2
+    t3
+EOF
+3          # 输出结果为 3 行
+```
+
+#### /dev/null 文件
+
+如果希望执行某个命令，但又不希望在屏幕上显示输出结果，那么可以将输出重定向到 /dev/null：
+
+`$ command > /dev/null`
+
+/dev/null 是一个特殊的文件，写入到它的内容都会被丢弃；如果尝试从该文件读取内容，那么什么也读不到。但是 /dev/null 文件非常有用，将命令的输出重定向到它，会起到"禁止输出"的效果。
+
+如果希望屏蔽 stdout 和 stderr，可以这样写：
+
+`$ command > /dev/null 2>&1`
+
+### 文件包含
+
+和其他语言一样，Shell 也可以包含外部脚本。这样可以很方便的封装一些公用的代码作为一个独立的文件。
+
+```shell
+# 注意点号(.)和文件名中间有一空格
+. filename
+
+# 或者使用source
+source filename
+```
