@@ -1,3 +1,11 @@
+---
+layout: post
+title: bumpversion的简单学习
+categories: [python, python模块, 转载]
+description: 使用bumpversion模块简化打版本信息
+keywords: python, python module, bumpversion
+---
+
 # bumpversion 的简单学习
 
 如果只是闭门造车，写点小脚本的话可以不用在意版本的问题。
