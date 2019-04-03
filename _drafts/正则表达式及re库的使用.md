@@ -1,9 +1,15 @@
 #正则表达式及re库的使用
+
 ##一、正则表达式
+
 正则表达式要做的事简单地说就是字符串匹配，它由普通字符、非打印字符、特殊字符、限定符和定位符构成。理论上可以匹配一切字符串。
+
 ##二、字符分类
+
 1、普通字符
+
 ##三、re库的使用
+
 re.match(pattern, string, flags=0)
 re.search(pattern, string, flags=0)
 re.sub(pattern, repl, string, count=0, flags=0)
