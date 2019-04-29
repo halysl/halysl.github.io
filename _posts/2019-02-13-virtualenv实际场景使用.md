@@ -1,3 +1,11 @@
+---
+layout: post
+title: virtualenv 实际场景使用
+categories: [python, virtualenv]
+description: python虚拟环境
+keywords: python, virtualenv, Linux
+---
+
 # virtualenv 实际场景使用
 
 virtualenv 是一个用来创建“独立” python 环境的工具，网上相关的资料相当多，但是很少有基于实际场景来叙述的，而且这个双引号独立也另有所指。
