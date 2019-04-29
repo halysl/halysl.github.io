@@ -57,10 +57,10 @@ virtualenv 已经集成在 python3.3 之后标准库的 venv 模块下，这里�
   1. virtualenv test
 
 安装截图：
-![](../images/blog/20190213-01.png)
+![](/images/blog/20190213-01.png)
 
 查看lib/python2.6/文件夹：
-![](../images/blog/20190213-02.png)
+![](/images/blog/20190213-02.png)
 
 可以看到直接使用的符号连接，这会导致一个问题，那就是虚拟环境迁移到其他主机上就会找不到路径。
 
@@ -71,10 +71,10 @@ virtualenv 已经集成在 python3.3 之后标准库的 venv 模块下，这里�
   3. virtualenv --always-copy -p /tmp/python27/bin/python test
 
 安装截图：
-![](../images/blog/20190213-03.png)
+![](/images/blog/20190213-03.png)
 
 查看lib/python2.7/文件夹：
-![](../images/blog/20190213-04.png)
+![](/images/blog/20190213-04.png)
 
 可以看到这里不再是符号连接了。那么这样的话就可以迁移环境到其他主机上了吗？
 
