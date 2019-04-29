@@ -28,28 +28,29 @@ virtualenv 已经集成在 python3.3 之后标准库的 venv 模块下，这里�
 `virtualenv [OPTIONS] DEST_DIR`
 
 可选项(基于virtualenv version：15.2.0)：
-  |指令|说明|备注|
-  |---|----|---|
-  |--version|显示版本|-|
-  |-h, --help|输出帮助文本|-|
-  |-v, --verbose|结果详细输出|-|
-  |-q, --quiet|结果简略输出|-|
-  |-p PYTHON_EXE, --python=PYTHON_EXE|指定 python 版本，例如：--python=python3.5 将会使用 python3.5 创建虚拟环境。如不指定该选项，则默认指定 python 解释器为(/usr/bin/python)|用得最多的选项。|
-  |--clear|清除非root用户安装并从头开始。|注：我没用过这个选项，一般装错直接删除目录。|
-  |--no-site-packages|已过时。仅保留向后兼容性。已成为默认选项。|很多资料显示使用这个参数，在当前版本下已经不需要指定该参数|
-  |--system-site-packages|为虚拟环境提供 目标python环境 已安装的包|-|
-  |--always-copy|总是复制文件而不是符号连接。|用的比较多的选项，后面会详细说|
-  |--relocatable|使一个现有的 virtualenv 环境可重定位。这会修复脚本，并生成相对的所有.pth文件|没用过，但应该会重新适配pth，之前遇到过一个环境路径问题，但只影响pip安装，不影响python使用（前提配置了路径）|
-  |--no-setuptools|不要在新的virtualenv中安装setuptools|-|
-  |--no-pip|不要在新的virtualenv中安装pip|-|
-  |--no-wheel|不要在新的virtualenv中安装wheel|-|
-  |--extra-search-dir=DIR|此选项允许您提供自己的setuptools或pip版本，而不是virtualenv附带的嵌入式版本。可多次使用。|-|
-  |--download|从PyPI下载预安装的软件包。|没用过。|
-  |--no-download, --never-download|不要从PyPI下载预安装的软件包。|没用过。|
-  |--prompt=PROMPT|为此环境提供备用提示前缀。|激活环境时的显示前缀|
-  |--setuptools|已过时。仅保留向后兼容性。该选项无用。|-|
-  |--distribute|已过时。仅保留向后兼容性。该选项无用。|-|
-  |--unzip-setuptools|已过时。仅保留向后兼容性。该选项无用。|-|
+
+|指令|说明|备注|
+|---|----|---|
+|--version|显示版本|-|
+|-h, --help|输出帮助文本|-|
+|-v, --verbose|结果详细输出|-|
+|-q, --quiet|结果简略输出|-|
+|-p PYTHON_EXE, --python=PYTHON_EXE|指定 python 版本，例如：--python=python3.5 将会使用 python3.5 创建虚拟环境。如不指定该选项，则默认指定 python 解释器为(/usr/bin/python)|用得最多的选项。|
+|--clear|清除非root用户安装并从头开始。|注：我没用过这个选项，一般装错直接删除目录。|
+|--no-site-packages|已过时。仅保留向后兼容性。已成为默认选项。|很多资料显示使用这个参数，在当前版本下已经不需要指定该参数|
+|--system-site-packages|为虚拟环境提供 目标python环境 已安装的包|-|
+|--always-copy|总是复制文件而不是符号连接。|用的比较多的选项，后面会详细说|
+|--relocatable|使一个现有的 virtualenv 环境可重定位。这会修复脚本，并生成相对的所有.pth文件|没用过，但应该会重新适配pth，之前遇到过一个环境路径问题，但只影响pip安装，不影响python使用（前提配置了路径）|
+|--no-setuptools|不要在新的virtualenv中安装setuptools|-|
+|--no-pip|不要在新的virtualenv中安装pip|-|
+|--no-wheel|不要在新的virtualenv中安装wheel|-|
+|--extra-search-dir=DIR|此选项允许您提供自己的setuptools或pip版本，而不是virtualenv附带的嵌入式版本。可多次使用。|-|
+|--download|从PyPI下载预安装的软件包。|没用过。|
+|--no-download, --never-download|不要从PyPI下载预安装的软件包。|没用过。|
+|--prompt=PROMPT|为此环境提供备用提示前缀。|激活环境时的显示前缀|
+|--setuptools|已过时。仅保留向后兼容性。该选项无用。|-|
+|--distribute|已过时。仅保留向后兼容性。该选项无用。|-|
+|--unzip-setuptools|已过时。仅保留向后兼容性。该选项无用。|-|
 
   ### 常用方法和实例
 
