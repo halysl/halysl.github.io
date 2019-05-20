@@ -552,3 +552,23 @@ open /System/Library/Frameworks/Tk.framework/Versions/Current/Resources/
 ```sh
 git branch | awk 'BEGIN{print "echo ****Update all local branch...@daimon***"}{if($1=="*"){current=substr($0,3)};print a"git checkout "substr($0,3);print "git pull --all";}END{print "git checkout " current}' |sh
 ```
+
+### 查看当前分支每个人的提交量
+
+```sh
+git log --format='%aN' | sort -u | while read name; do echo -en "$name\t"; git log --author="$name" --pretty=tformat: --numstat | awk '{ add += $1; subs += $2; loc += $1 - $2 } END { printf "added lines: %s, removed lines: %s, total lines: %s\n", add, subs, loc }' -; done
+```
+
+### .gitkeep 的作用
+
+.gitkeep 的作用就是 `保留一个空文件夹`。
+
+众所周知，git 不会跟踪空文件夹，但假设现在有个 logs 文件夹，在提交的时候不应该有 log 文件，但应当保留 logs 文件夹，但是里面的内容为空。
+
+.gitignore
+```txt
+logs/
+!.gitkeep
+```
+
+git会忽略 logs 文件夹下除了 .gitkeep 外的所有文件。
