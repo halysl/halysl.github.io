@@ -1,10 +1,10 @@
-# Python 源码安装
+# 【转载】Python 源码安装
 
 这里的 Python 源码指的是从官网下载的 官方版本的解释器：CPython。
 
-官网 python.org 下载压缩包，解压
+官网 [python.org](python.org) 下载压缩包，解压
 
-然后，在./configure的时候，需要加上  --enable-optimizations参数，这样才能启用很多功能。
+然后，在 ./configure 的时候，需要加上  --enable-optimizations 参数，这样才能启用很多功能。
 
 网上看到很多人说要用 ./configure --with-ssl，这是没用的，日志上写明白了 not recognized option '--with-ssl'。
 
@@ -23,8 +23,10 @@ python3> import ssl
 
 
 另外在编译安装git等工具时，都把 --enable-optimizations 参数带上，这样才是以“官方发布的稳定版本”编译。
---------------------- 
-作者：EncoderJ 
-来源：CSDN 
-原文：https://blog.csdn.net/Pretendness/article/details/80032016 
-版权声明：本文为博主原创文章，转载请附上博文链接！
+
+## 转载信息
+
+- 作者：EncoderJ 
+- 来源：CSDN 
+- 原文：https://blog.csdn.net/Pretendness/article/details/80032016 
+- 版权声明：本文为博主原创文章，转载请附上博文链接！
