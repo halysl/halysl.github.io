@@ -1,0 +1,52 @@
+# linux 登陆欢迎提示信息的设置
+
+## 1、/etc/issue
+
+/etc/issue 本地登陆显示的信息，本地登录前会提示。
+
+先看下这个文件的内容：
+
+```shell
+#cat /etc/issue
+Red Hat Enterprise Linux Server release 6.8 (Santiago)
+Kernel \r on an \m
+```
+
+字符都可以看得懂，但是 \r、\m 是什么意思呢，通过 `man pam_issue` 可以看出这些转义字符的意思。
+
+|字符|含义|
+|---|---|
+|\d|本地端时间的日期|
+|\l|显示当前tty的名字即第几个tty|
+|\m|显示硬体的架构 (i386/i486/i586/i686...)|
+|\n|显示主机的网路名称|
+|\o|显示 domain name|
+|\r|当前系统的版本 (相当于 uname -r)|
+|\t|显示本地端时间的时间|
+|\u|当前有几个用户在线|
+|\s|当前系统的名称|
+|\v|当前系统的版本|
+
+## 2、/etc/issue.net
+
+/etc/issue.net 网络登陆显示的信息，登录后显示，ssh登陆需要由 sshd 配置。
+
+若通过远程本文设备（如通过ssh或telnet等）登录，则显示该文件的内容。
+
+其主要内容和 /etc/issue 类似，可以根据需求调整。
+
+## 3、/etc/motd
+
+/etc/motd 常用于通告信息，如计划关机时间的警告等，登陆后的提示信息，也是用得最多的情况，也是最能玩出花的配置。
+
+它和 issue 的区别在于，后者会在登陆账号前提示，前者会在登陆后出现。
+
+最简单的用法
+
+## 4、ssh 登陆的配置
+
+使用ssh登录时，会不会显示 issue 信息由 sshd 服务的 sshd_config 的 Banner 属性配置决定，虽设置了 Banner 属性但并未对issue.net 中的 \r 和 \m 等内容进行转义，而是直接显示。如何正常转义，有待下一步的操作。
+
+注意，改完 sshd_config 配置后要重置服务，`service sshd restart`。
+
+## 5、当提示信息遇上ansi
