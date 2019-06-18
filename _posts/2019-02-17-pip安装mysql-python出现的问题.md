@@ -1,7 +1,7 @@
 ---
 layout: post
 title: pip安装mysql-python出现的问题
-categories: [python, pip]
+categories: [Python, Python模块]
 description: pip安装mysql-python出现的问题
 keywords: python, pip, linux
 ---

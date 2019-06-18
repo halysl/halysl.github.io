@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 转载-利用srvctl管理RAC数据库
-categories: [Oracle, RAC, srvctl]
+categories: [Oracle]
 description: 
 keywords: Oracle, 转载， RAC
 ---

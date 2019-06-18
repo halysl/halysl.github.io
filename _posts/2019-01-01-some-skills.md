@@ -1,9 +1,9 @@
 ---
 layout: post
 title: 一些技巧
-categories: [linux, python]
+categories: [Linux, Python]
 description: some word here
-keywords: linux, python, skill
+keywords: Linux, Python, skill
 ---
 
 # 一些技巧

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: marshmallow 库的简单学习
-categories: [python, python模块]
+categories: [Python, Python模块]
 description: 使用marshmallow对数据进行校验
 keywords: python, python module, marshmallow
 ---

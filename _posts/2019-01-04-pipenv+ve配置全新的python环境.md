@@ -1,7 +1,7 @@
 ---
 layout: post
 title: pipenv+virtualenv配置全新的python环境
-categories: [python, pipenv]
+categories: [Python, pipenv, Python模块]
 description: 让python项目运行在任意Linux上
 keywords: python, pipenv, linux
 ---

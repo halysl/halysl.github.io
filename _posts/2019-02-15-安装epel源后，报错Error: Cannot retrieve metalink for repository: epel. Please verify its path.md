@@ -1,9 +1,9 @@
 ---
 layout: post
 title: 转载-安装epel源后，报错Error
-categories: [Linux, Centos]
+categories: [Linux]
 description: Cannot retrieve metalink for repository epel. Please verify its path
-keywords: Linux, 转载
+keywords: Linux, 转载, Centos
 ---
 
 # [转]安装epel源后，报错Error: Cannot retrieve metalink for repository: epel. Please verify its path..

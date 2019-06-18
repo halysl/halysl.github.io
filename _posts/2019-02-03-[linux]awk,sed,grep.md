@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 【转】Linux 之三剑客，awk、sed、grep的用法
-categories: [Linux, awk, sed, grep]
+categories: [Linux]
 description: Linux 下的字符处理
 keywords: Linux, awk, sed, grep
 ---

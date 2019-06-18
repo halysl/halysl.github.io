@@ -1,7 +1,7 @@
 ---
 layout: post
 title: virtualenv 实际场景使用
-categories: [python, virtualenv]
+categories: [Python, Python模块]
 description: python虚拟环境
 keywords: python, virtualenv, Linux
 ---

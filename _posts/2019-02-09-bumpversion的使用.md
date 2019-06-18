@@ -1,7 +1,7 @@
 ---
 layout: post
 title: bumpversion的简单学习
-categories: [python, python模块, 转载]
+categories: [Python, Python模块, 转载]
 description: 使用bumpversion模块简化打版本信息
 keywords: python, python module, bumpversion
 ---

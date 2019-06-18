@@ -1,9 +1,9 @@
 ---
 layout: post
 title: 转载-Linux 防火墙：关于 iptables 和 firewalld 的那些事 
-categories: [Linux, iptables]
+categories: [Linux, 转载]
 description: pass
-keywords: Linux, 转载
+keywords: Linux, iptables
 ---
 
 # 【转】Linux 防火墙：关于 iptables 和 firewalld 的那些事 
