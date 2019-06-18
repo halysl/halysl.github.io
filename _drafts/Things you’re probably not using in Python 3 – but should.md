@@ -1,0 +1,251 @@
+# 你可能还没有使用过的python3特性---但你应该用
+
+很多人因为看到了[Python EOL](https://pythonclock.org/)而将代码从 python2.x 迁移到了 python3.x。不幸的是，大多数的 python3 代码看起来很像 python2.在下面我将展示一些例子来说明部分 python3 特性，希望它们可以让你用 python 解决问题更简单。
+
+以下的代码将以 Python3.7 书写。
+
+## f-Strings(3.6+)
+
+在任何编程语言中，没有字符串结构，都很难以工作。大多数人使用 `format` 格式化文本，如下所示：
+
+```python
+user = "Jane Doe"
+action = "buy"
+
+log_message = 'User {} has logged in and did an action {}.'.format(
+  user,
+  action
+)
+print(log_message)
+# User Jane Doe has logged in and did an action buy.
+```
+
+除此之外，Python3 还提供了一种通过 f-string 进行字符串插值的灵活方法。使用 f-strings 的上述代码如下所示：
+
+```python
+user = "Jane Doe"
+action = "buy"
+
+log_message = f'User {user} has logged in and did an action {action}.'
+print(log_message)
+# User Jane Doe has logged in and did an action buy.
+```
+
+有时候会写一种很蠢的写法，如果用 f-String 就能解决，实例如下：
+
+```python
+user = "Jane Doe"
+action = "buy"
+
+log_message = 'User {user} has logged in and did an action {action}.'.format(
+  user=user,
+  action=action
+)
+print(log_message)
+# User Jane Doe has logged in and did an action buy.
+```
+
+## Pathlib (3.4+)
+
+f-Strings 确实好用，但是某些特殊的字符串，例如文件路径这样的字符串有自己的库，使用相应的库会更加方便。Python3 提供了 `pathlib` 作为处理文件路径的抽象方法。如果您不确定为什么要使用 `pathlib`，请尝试阅读这篇优秀文章 - [Why you should be using pathlib](https://treyhunner.com/2018/12/why-you-should-be-using-pathlib/)。
+
+```python
+from pathlib import Path
+root = Path('post_sub_folder')
+print(root)
+# post_sub_folder
+path = root / 'happy_user'
+# Make the path absolute
+print(path.resolve())
+# /home/weenkus/Workspace/Projects/DataWhatNow-Codes/how_your_python3_should_look_like/post_sub_folder/happy_user
+```
+
+## 类型提示（3.5+）
+
+静态与动态类型是软件工程中的一个热门话题，几乎每个人都对它有一个看法。我会让读者决定何时应该编写类型，但我认为你至少应该知道Python 3支持类型提示。
+
+```python
+def sentence_has_animal(sentence: str) -> bool:
+  return "animal" in sentence
+sentence_has_animal("Donald had a farm without animals")
+# True
+```
+
+## 枚举类型（3.4+）
+
+Python3 通过 `Enum` 类轻易的实现枚举类型。枚举是一种封装常量列表的便捷方式，因此它们不会随机分布在整个代码。
+
+```python
+from enum import Enum, auto
+class Monster(Enum):
+    ZOMBIE = auto()
+    WARRIOR = auto()
+    BEAR = auto()
+    
+print(Monster.ZOMBIE)
+# Monster.ZOMBIE
+```
+
+> 枚举是一组绑定到唯一常量值的符号名称（成员）。在枚举中，可以通过标识来比较成员，并且可以迭代枚举本身。
+
+## 内建 LRU cache（3.2+）
+
+高速缓存存在于我们今天使用的软件和硬件的几乎任何水平切片中。Python3 通过将 LRU（最近最少使用）缓存暴露为名为 lru_cache 的装饰器，使得使用它们变得非常简单。
+
+下面是一个简单的Fibonacci函数，我们知道它将从缓存中受益，因为它通过递归多次执行相同的工作。
+
+```python
+import time
+def fib(number: int) -> int:
+    if number == 0: return 0
+    if number == 1: return 1
+    
+    return fib(number-1) + fib(number-2)
+start = time.time()
+fib(40)
+print(f'Duration: {time.time() - start}s')
+# Duration: 30.684099674224854s
+```
+
+```python
+from functools import lru_cache
+@lru_cache(maxsize=512)
+def fib_memoization(number: int) -> int:
+    if number == 0: return 0
+    if number == 1: return 1
+    
+    return fib_memoization(number-1) + fib_memoization(number-2)
+start = time.time()
+fib_memoization(40)
+print(f'Duration: {time.time() - start}s')
+# Duration: 6.866455078125e-05s
+```
+
+## 扩展的解包
+
+```python
+head, *body, tail = range(5)
+print(head, body, tail)
+# 0 [1, 2, 3] 4
+py, filename, *cmds = "python3.7 script.py -n 5 -l 15".split()
+print(py)
+print(filename)
+print(cmds)
+# python3.7
+# script.py
+# ['-n', '5', '-l', '15']
+first, _, third, *_ = range(10)
+print(first, third)
+# 0 2
+```
+
+## 数据类（3.7+）
+
+Python 3 引入了数据类，这些数据类没有很多限制，可用于减少样板代码，因为装饰器会自动生成特殊方法，例如 \_\_init__() 和 \_\_repr()__。从官方提案中，它们被描述为“具有默认值的可变命名元组”。
+
+假设没定义 \_\_repr()__，那么输出即为默认输出。
+
+```python
+class Armor:
+    
+    def __init__(self, armor: float, description: str, level: int = 1):
+        self.armor = armor
+        self.level = level
+        self.description = description
+                 
+    def power(self) -> float:
+        return self.armor * self.level
+    
+armor = Armor(5.2, "Common armor.", 2)
+armor.power()
+# 10.4
+print(armor)
+# <__main__.Armor object at 0x7fc4800e2cf8>
+```
+
+现在换个写法定义类：
+
+```python
+from dataclasses import dataclass
+@dataclass
+class Armor:
+    armor: float
+    description: str
+    level: int = 1
+    
+    def power(self) -> float:
+        return self.armor * self.level
+    
+armor = Armor(5.2, "Common armor.", 2)
+armor.power()
+# 10.4
+print(armor)
+# Armor(armor=5.2, description='Common armor.', level=2)
+```
+
+可以看到没有 \_\_init()__ 和 \_\_repr()__ 方法，但装饰器帮助实现了。
+
+## 隐式命名空间包（3.3+）
+
+描述一些 Python 代码位于一个包内就是文件夹内有 `__init__.py` 文件，哪怕其本身不包含所有数据。
+
+```shell
+sound/                          Top-level package
+      __init__.py               Initialize the sound package
+      formats/                  Subpackage for file format conversions
+              __init__.py
+              wavread.py
+              wavwrite.py
+              aiffread.py
+              aiffwrite.py
+              auread.py
+              auwrite.py
+              ...
+      effects/                  Subpackage for sound effects
+              __init__.py
+              echo.py
+              surround.py
+              reverse.py
+              ...
+      filters/                  Subpackage for filters
+              __init__.py
+              equalizer.py
+              vocoder.py
+              karaoke.py
+              ...
+```
+
+在 Python2 中，如上所示，每个文件夹内都包含一个 `__init__.py` 文件。在 Python3 中，有了隐式命名空间包，文件就不需要更多的要求。
+
+```shell
+sound/                          Top-level package
+      __init__.py               Initialize the sound package
+      formats/                  Subpackage for file format conversions
+              wavread.py
+              wavwrite.py
+              aiffread.py
+              aiffwrite.py
+              auread.py
+              auwrite.py
+              ...
+      effects/                  Subpackage for sound effects
+              echo.py
+              surround.py
+              reverse.py
+              ...
+      filters/                  Subpackage for filters
+              equalizer.py
+              vocoder.py
+              karaoke.py
+              ...
+```
+
+## 结束说明
+
+像几乎任何互联网上的列表一样，这个列表并不完整。我希望这篇文章向您展示了至少一个您以前不知道的Python 3功能，并且它将帮助您编写更清晰，更直观的代码。与往常一样，所有代码都可以在[GitHub](https://github.com/Weenkus/DataWhatNow-Codes/blob/master/things_you_are_probably_not_using_in_python_3_but_should/python%203%20examples.ipynb)上找到。
+
+
+## 转载翻译说明
+
+- Website: [Things you’re probably not using in Python 3 – but should](https://datawhatnow.com/things-you-are-probably-not-using-in-python-3-but-should/)
+- Author: [Vinko Kodžoman](https://github.com/Weenkus)
