@@ -1,0 +1,169 @@
+# Python 新式类和旧式类
+
+新式类从 python2.2 开始引入。
+
+## 定义区别
+
+```python
+# python2.x
+
+class A:  # 旧式类
+    pass
+
+class B(object):  # 新式类
+    pass
+
+class C(A):  # 旧式类，因为 A 是旧式类
+    pass
+
+class D(B):  # 新式类
+    pass
+
+class E(A, B):  # 新式类
+    pass
+
+class F(B, A):  # 新式类
+```
+
+```python
+# python3.x
+
+class A:  # python3.x 全是新式类
+    pass
+```
+
+## 使用区别
+
+- \_\_class__ 执行结果和type不一致
+- 继承搜索的顺序
+- \_\_slots__
+- \_\_getattribute__
+
+1. 对新式类的实例执行 a.\_\_class__ 与 type(a) 的结果是一致的，对于旧式类来说就不一样了。
+
+```python
+>>> class A:
+...     pass
+>>> a = A()
+>>> a
+<__main__.A instance at 0x10654bc68>
+>>> a.__class__
+<class __main__.A at 0x1064cec18>
+>>> type(a)
+<type 'instance'>
+
+>>> class B(object):
+...     pass
+...
+>>> b = B()
+>>> b.__class__
+<class '__main__.B'>
+>>> type(b)
+<class '__main__.B'>
+```
+
+2. 继承搜索的顺序
+
+```python
+class A():
+    def __init__(self):
+        pass
+    def save(self):
+        print "This is from A"
+
+class B(A):
+    def __init__(self):
+        pass
+
+class C(A):
+    def __init__(self):
+        pass
+    def save(self):
+        print  "This is from C"
+
+class D(B,C):
+    def __init__(self):
+        pass
+
+fun =  D()
+fun.save()
+```
+
+经典类的答案： This is from A
+新式类的答案： This is from C
+
+继承搜索的顺序发生了改变，经典类多继承属性搜索顺序：先深入继承树左侧，再返回，开始找右侧；新式类多继承属性搜索顺序：先水平搜索，然后再向上移动。
+
+至于继承顺序是什么，可以去看 super() 方法和 \_\_mro__ 这个东西。
+
+3. \_\_slots__
+
+新式类增加了 \_\_slots__ 内置属性, 可以把实例属性的种类锁定到 \_\_slots__ 规定的范围之中。
+
+这里就要提到 \_\_slots__ 的作用，它可以限制类成员属性，也可以给出一些属性，新式类才有的，但是关于它的用法，遇到了一个类似于「属性权限提升」的问题，具体原因有空再谈，下面是相关代码。
+
+```python
+In [6]: class A(object):
+   ...:     __slots__ = ('name', 'age')
+   ...:
+In [7]: A.__dict__
+Out[7]:
+mappingproxy({'__module__': '__main__',
+              '__slots__': ('name', 'age'),
+              'age': <member 'age' of 'A' objects>,
+              'name': <member 'name' of 'A' objects>,
+              '__doc__': None})
+
+In [8]: a = A()
+In [10]: a.name = 1
+
+In [11]: a.name
+Out[11]: 1
+
+In [12]: A.name = 2
+
+In [13]: a.name
+Out[13]: 2
+
+In [14]: a.name = 3
+---------------------------------------------------------------------------
+AttributeError                            Traceback (most recent call last)
+<ipython-input-14-5e6239468326> in <module>
+----> 1 a.name = 3
+
+AttributeError: 'A' object attribute 'name' is read-only
+```
+
+4. 新式类增加了 \_\_getattribute__ 方法
+
+新式类，每次通过实例访问属性，都会经过 \_\_getattribute__ 函数，这个方法的加入，当访问属性或者方法的时候都会走这条线。
+
+关于 \_\_getattribute__ 和 \_\_getattr__ 的区别和使用，单独开一个篇章说明，这里明确，新式类才会有 \_\_getattribute__ 这个方法。
+
+```python
+class A(object):  
+    def __getattribute__(self, *args, **kwargs):  
+	    print "A.__getattribute__"
+		
+	
+class A1():  
+    def __getattribute__(self, *args, **kwargs):  
+	    print "A1.__getattribute__"
+		
+	
+a1 = A1()
+a = A()
+
+a.test
+print "========="
+a1.test
+
+A.__getattribute__
+=========
+Traceback (most recent call last):
+  File "t.py", line 18, in <module>
+    a1.test
+AttributeError: A1 instance has no attribute 'test'
+```
+
+但是在这里，不推荐直接使用这个方法，它会影响太多的东西，使用过程中也要注意循环调用的坑。
