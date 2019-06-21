@@ -1,3 +1,11 @@
+---
+layout: post
+title: __getattribute__ 和 __getattr__ 的区别
+categories: [Python]
+description: __getattribute__ 和 __getattr__ 的区别
+keywords: Python
+---
+
 # __getattribute__ 和 __getattr__ 的区别
 
 这两个方法在外形上有点相似，但是差距不小，后面的 getattr() 和 setattr()、delattr()类似于Java里的 setter，getter。
