@@ -14,3 +14,11 @@ __repr__
 
 __format__
 __doc__
+
+__get__
+__set__
+
+__getattribute__
+__getattr__
+__setattr__
+__delattr__
