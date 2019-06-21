@@ -1,6 +1,6 @@
 # __getattribute__ 和 __getattr__ 的区别
 
-这两个方法在外形上有点相似，但是差距不小，后面的 getattr() 和 setattr()、delattr()类似于Java里的setter，getter。
+这两个方法在外形上有点相似，但是差距不小，后面的 getattr() 和 setattr()、delattr()类似于Java里的 setter，getter。
 
 ## __getattribute__ 是啥子
 
@@ -71,7 +71,7 @@ print(s1.num)
 
 ## __getattr__ 是啥子
 
-当访问某个实例属性时， `__getattribute__` 会被无条件调用.
+当访问某个实例属性时， `__getattribute__` 会被无条件调用。
 
 如果没有实现自己的 `__getattr__` 方法，就会抛出 `AttributeError` 提示找不到这个属性。
 
@@ -91,3 +91,5 @@ t = Test('p1')
 print(t.p)
 print(t.p2)
 ```
+
+和 `__getattr__` 同一级别的还有 `__setattr__` 和 `__delattr__` 方法。
