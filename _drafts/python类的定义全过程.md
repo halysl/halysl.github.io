@@ -3,6 +3,8 @@ https://juejin.im/post/5add4446f265da0b8d4186af
 
 https://www.cnblogs.com/ifantastic/p/3175735.html
 
+## 开篇
+
 一直以来使用 Python 里的类，都是先写类名，然后 `__init__`， 并且 Python 变量不需要声明类型的，就理所应当的觉得 Python 里没有 new，不像是 Java 或者 C# 那样使用一个对象前要先 new 一个出来，然后再实例化。
 
 结果是 Python 里有 `__new__` 这个概念，但是大部分情况下会被隐藏，我们可以先定义一个类，然后 dir(cls) 看下有哪些方法。
@@ -10,3 +12,176 @@ https://www.cnblogs.com/ifantastic/p/3175735.html
 `__new__` 是在新式类中新出现的方法，它作用在构造方法建造实例之前，可以这么理解，在 Python 中存在于类里面的构造方法 `__init__` 负责将类的实例化，而在 `__init__` 启动之前，`__new__` 决定是否要使用该 `__init__` 方法，因为 `__new__` 可以调用其他类的构造方法或者直接返回别的对象来作为本类的实例。
 
 如果将类比喻为工厂，那么 `__init__` 方法则是该工厂的生产工人，`__init__` 方法接受的初始化参数则是生产所需原料，`__init__` 方法会按照方法中的语句负责将原料加工成实例以供工厂出货。而 `__new__` 则是生产部经理，`__new__` 方法可以决定是否将原料提供给该生产部工人，同时它还决定着出货产品是否为该生产部的产品，因为这名经理可以借该工厂的名义向客户出售完全不是该工厂的产品。
+
+
+`__new__()` 方法的特性：
+
+- `__new__()` 方法是在类准备将自身实例化时调用。
+- `__new__()` 方法始终都是类的静态方法，即使没有被加上静态方法装饰器。
+
+## __new__ 和 __init__
+
+先来定义个类：
+
+```python
+class Test(object):
+    def __init__(self, *args, **kwargs):
+        print("in init...")
+
+test = Test()
+```
+
+上述代码会输出一句 “in init”，但是它隐藏了对 `__new__` 的调用，再来定义个类。
+
+```python
+class Test(object):
+    def __init__(self, *args, **kwargs):
+        print("in init...")
+
+    def __new__(cls, *args, **kwargs):
+        print("in new...")
+        return object.__new__(cls, *args, **kwargs)
+
+test = Test()
+```
+
+可以先看出输出了 “in new...”，然后是 “in init...”，这说明 `__new__` 先被调用，然后 `__init__` 才被调用。
+
+`__new__` 是先实例化一个对象， `__init__` 是初始化一个对象，中间会自动调用。
+
+```python
+def __new__(cls, *args, **kwargs):
+    ...
+```
+
+第一个参数 cls 是当前正在实例化的类。
+
+如果要得到当前类的实例，应当在当前类中的 `__new__` 方法语句中调用当前类的父类的 `__new__` 方法。
+
+例如，如果当前类是直接继承自 object，那当前类的 `__new__` 方法返回的对象应该为：
+
+```python
+def __new__(cls, *args, **kwargs):
+    ...
+    return object.__new__(cls)
+```
+
+> 注意:
+> - 事实上如果（新式）类中没有重写 `__new__()` 方法，即在定义新式类时没有重新定义 `__new__()` 时，Python 默认是调用该类的直接父类的 `__new__()` 方法来构造该类的实例，如果该类的父类也没有重写 `__new__()`，那么将一直按此规矩追溯至 object 的 `__new__()` 方法，因为 object 是所有新式类的基类。
+> - 而如果新式类中重写了 `__new__()` 方法，那么你可以自由选择任意一个的其他的新式类（必定要是新式类，只有新式类必定都有 `__new__()`，因为所有新式类都是 object 的后代，而经典类则没有 `__new__()` 方法）的 `__new__()` 方法来制造实例，包括这个新式类的所有前代类和后代类，只要它们不会造成递归死循环。
+
+具体看以下代码解释：
+
+```python
+class Foo(object):
+    def __init__(self, *args, **kwargs):
+        pass
+    def __new__(cls, *args, **kwargs):
+        return object.__new__(cls, *args, **kwargs)    
+
+# 以上return等同于 
+# return object.__new__(Foo, *args, **kwargs)
+# 以下两个 return 是由于 Strange 继承自 object，而 Child 继承 Foo
+# 所以两者的最终调用还是 等同于 object.__new__(cls, *args, **kwargs)
+# 这里的 cls 指的是 Foo
+# return Stranger.__new__(cls, *args, **kwargs)
+# return Child.__new__(cls, *args, **kwargs)
+
+class Child(Foo):
+    def __new__(cls, *args, **kwargs):
+        return object.__new__(cls, *args, **kwargs)
+# 如果Child中没有定义 __new__() 方法，那么会自动调用其父类的 __new__() 方法来制造实例，即 Foo.__new__(cls, *args, **kwargs)。
+# 在任何新式类的 __new__() 方法，不能调用自身的 __new__() 来制造实例，因为这会造成死循环。因此必须避免类似以下的写法：
+# 在 Foo 中避免：return Foo.__new__(cls, *args, **kwargs)或 return cls.__new__(cls, *args, **kwargs)。Child 同理。
+# 使用 object 或者没有血缘关系的新式类的__new__()是安全的，但是如果是在有继承关系的两个类之间，应避免互调造成死循环，例如:(Foo)return Child.__new__(cls), (Child)return Foo.__new__(cls)。
+
+class Stranger(object):
+    ...
+# 在制造Stranger实例时，会自动调用 object.__new__(cls)
+```
+
+ **通常来说，新式类开始实例化时，__new__() 方法会返回 cls（cls 指代当前类）的实例，然后该类的 __init__() 方法作为构造方法会接收这个实例（即self）作为自己的第一个参数，然后依次传入 __new__() 方法中接收的位置参数和命名参数。**
+
+ 注意：如果 `__new__()` 没有返回 cls（即当前类）的实例，那么当前类的 `__init__()` 方法是不会被调用的。如果 `__new__()` 返回其他类（新式类或经典类均可）的实例，那么只会调用被返回的那个类的构造方法。
+
+ ```python
+ class Foo(object):
+    def __init__(self, *args, **kwargs):
+        ...
+    def __new__(cls, *args, **kwargs):
+        return object.__new__(Stranger, *args, **kwargs)  
+
+class Stranger(object):
+    ...
+
+foo = Foo()
+print type(foo)    
+
+# 打印的结果显示 foo 其实是 Stranger 类的实例。
+
+# 因此可以这么描述 __new__() 和 __ini__() 的区别，在新式类中 __new__() 才是真正的实例化方法，为类提供外壳制造出实例框架，然后调用该框架内的构造方法 __init__() 使其丰满。
+# 如果以建房子做比喻，__new__() 方法负责开发地皮，打下地基，并将原料存放在工地。而 __init__() 方法负责从工地取材料建造出地皮开发招标书中规定的大楼，__init__() 负责大楼的细节设计，建造，装修使其可交付给客户。
+ ```
+
+ ## 应用
+
+ 1. 单例模式
+
+ ```python
+ class Singleton(object):
+    _instance = None
+    def __new__(cls, *args, **kwargs):
+        if cls._instance is None:
+            cls._instance = object.__new__(cls, *args, **kwargs)
+
+        return cls._instance
+
+s1 = Singleton()
+s2 = Singleton()
+print(s1)
+print(s2) 
+```
+
+2. 工厂模式
+
+```python
+class Fruit(object):
+    def __init__(self):
+        pass
+
+    def print_color(self):
+        pass
+
+class Apple(Fruit):
+    def __init__(self):
+        pass
+
+    def print_color(self):
+        print("apple is in red")
+
+class Orange(Fruit):
+    def __init__(self):
+        pass
+
+    def print_color(self):
+        print("orange is in orange")
+
+class FruitFactory(object):
+    fruits = {"apple": Apple, "orange": Orange}
+
+    def __new__(cls, name):
+        if name in cls.fruits.keys():
+            return cls.fruits[name]()
+        else:
+            return Fruit()
+
+fruit1 = FruitFactory("apple")
+fruit2 = FruitFactory("orange")
+fruit1.print_color()    
+fruit2.print_color() 
+```
+
+## 参考
+
+- [Python 之 __new__() 方法与实例化](https://www.cnblogs.com/ifantastic/p/3175735.html)
+- [Python面试之理解__new__和__init__的区别](https://juejin.im/post/5add4446f265da0b8d4186af)
