@@ -1,3 +1,11 @@
+---
+layout: wiki
+title: top指令的学习和使用
+categories: [Linux]
+description: top指令的学习和使用
+keywords: Linux, top
+---
+
 # [Linux]top指令的学习和使用
 
 ## 参数含义
