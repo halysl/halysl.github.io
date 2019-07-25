@@ -110,3 +110,94 @@ pipenv [OPTIONS] COMMAND [ARGS]...
 
 ARGS 可选参数
 
+## clean
+
+卸载所有不在 Pipfile.lock 中的包。
+
+`pipenv clean [OPTIONS]`
+
+### Options
+
+--bare
+
+--dry-run 只输出不必要的包
+
+-v, --verbose
+
+--three, --two
+
+--python <python>
+
+## graph
+
+展示当前安装包的依赖关系。
+
+`pipenv graph [OPTIONS]`
+
+### Options
+
+--bare
+
+--json 输出json格式依赖信息
+
+--json-tree 输出json树格式依赖信息
+
+--reverse 反转依赖图
+
+## install
+
+安装三方包，并记录到Pipfile，或者从Pipifile中安装包。
+
+`pipenv install [OPTIONS] [PACKAGES]...`
+
+### Options
+
+--system 使用系统的pip安装
+
+-c, --code \<code\> 通过import语句发现包并安装包（不要用引号）
+
+--deploy 如果Pipfile.lock已过期，或者Python版本错误，则中止安装
+
+--site-packages, --no-site-packages
+
+--skip-lock 安装包后不进行锁定
+
+-e, --editable <editable> 可编辑的python包URL或路径，通常用于VCS存储库
+
+--ignore-pipfile 安装包时忽略Pipfile，使用Pipfile.lock
+
+--selective-upgrade 更新指定的包
+
+-r, --requirements <requirements> 从requirements.txt发现包，并安装
+
+--extra-index-url <extra_index_url> 从额外的Pypi库里找到需要的包（例如公司内部的Pypi源）
+
+-i, --index <index>
+
+--sequential 一次一个地安装依赖项，而不是同时安装
+
+--keep-outdated 保持在Pipfile.lock中更新过时的依赖项
+
+--pre 允许预发布的包
+
+-d, --dev 将包安装在开发环境中
+
+--python <python>
+
+--three, --two
+
+--clear 清理缓存 (pipenv, pip, and pip-tools).
+
+-v, --verbose
+
+--pypi-mirror <pypi_mirror> 指定pypi镜像
+
+### Arguments
+
+PACKAGES 包名
+
+### Environment variables
+
+- PIPENV_SKIP_LOCK 默认提供 --skip-lock 选项
+- PIP_EXTRA_INDEX_URL 默认提供 --extra-index-url 选项
+- PIP_INDEX_URL 默认提供 -i 选项
