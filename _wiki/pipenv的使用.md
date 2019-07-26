@@ -1,4 +1,10 @@
-https://docs.pipenv.org/en/latest/
+---
+layout: wiki
+title: pipenv 的指令
+categories: [pipenv]
+description: pipenv 的指令
+keywords: pipenv
+---
 
 # Pipenv 指令解释
 
@@ -201,3 +207,208 @@ PACKAGES 包名
 - PIPENV_SKIP_LOCK 默认提供 --skip-lock 选项
 - PIP_EXTRA_INDEX_URL 默认提供 --extra-index-url 选项
 - PIP_INDEX_URL 默认提供 -i 选项
+
+## lock
+
+生成Pipfile.lock文件。
+
+`pipenv lock [OPTIONS]`
+
+### Options
+
+-r, --requirements 生成requirements.txt文件
+
+--keep-outdated 
+
+--pre 
+
+-d, --dev
+
+--python <python>
+
+--three, --two
+
+--clear 
+
+-v, --verbose
+
+--pypi-mirror <pypi_mirror> 
+
+## open
+
+在编辑器中查看给定的模块（包括工作环境代码）。
+
+`pipenv open [OPTIONS] MODULE`
+
+### Options
+
+--python <python> 指定使用特定版本的 python
+
+--three, --two
+
+--clear 
+
+-v, --verbose 
+
+--pypi-mirror <pypi_mirror>
+
+### Arguments
+
+MODULE 包名或者文件夹名
+
+## run
+
+生成一个（虚拟环境中的）指令而不进入虚拟环境。
+
+`pipenv run [OPTIONS] COMMAND [ARGS]...`
+
+### Options
+
+--python <python> 指定使用特定版本的 python
+
+--three, --two
+
+--clear
+
+-v, --verbose
+
+--pypi-mirror <pypi_mirror>
+
+### Arguments
+
+- COMMAND 必备参数，指令
+- ARGS 可选参数，指令需要的参数
+
+## shell
+
+催生一个虚拟环境shell。
+
+`pipenv shell [OPTIONS] [SHELL_ARGS]...`
+
+### Options
+
+--fancy 以花哨模式启动shell（没看懂，没测试成功）
+
+--anyway 无论如何都生成一个新的shell
+
+--pypi-mirror <pypi_mirror>
+
+--three, --two
+
+--python <python> 指定使用特定版本的 python
+
+### Arguments
+
+SHELL_ARGS 可选参数
+
+## sync
+
+通过 Pipfile.lock 安装包，通常用于部署环境。
+
+`pipenv sync [OPTIONS]`
+
+### Options
+
+--bare
+
+--sequential
+
+--keep-outdated
+
+--pre
+
+-d, --dev
+
+--python <python>
+
+--three, --two
+
+--clear
+
+-v, --verbose
+
+--pypi-mirror <pypi_mirror>
+
+## uninstall
+
+卸载指定的包，并且在Pipfile中删除。
+
+`pipenv uninstall [OPTIONS] [PACKAGES]...`
+
+### Options
+
+--all-dev 卸载所有开发环境，即记录在Pipfile里[dev-packages]项目里的包
+
+--all 清除虚拟环境里的所有包，但不修改Pipfile
+
+-e, --editable <editable> 可编辑的python包URL或路径，通常用于VCS存储库
+
+--skip-lock
+
+--keep-outdated
+
+--pre
+
+-d, --dev
+
+--python <python>
+
+--three, --two
+
+--clear
+
+-v, --verbose
+
+--pypi-mirror <pypi_mirror>
+
+### Arguments
+
+PACKAGES 可选参数，包名
+
+## update
+
+执行 `pipenv lock`， 然后 `pipenv sync`。
+
+`pipenv update [OPTIONS] [PACKAGES]...`
+
+### Options
+
+--bare
+
+--outdated
+
+--dry-run 列出过时的依赖项
+
+-e, --editable <editable>
+
+--ignore-pipfile 安装包时忽略Pipfile，使用Pipfile.lock
+
+--selective-upgrade
+
+-r, --requirements <requirements>
+
+--extra-index-url <extra_index_url>
+
+-i, --index <index>
+
+--sequential
+
+--keep-outdated
+
+--pre
+
+-d, --dev
+
+--python <python>
+
+--three, --two
+
+--clear
+
+-v, --verbose
+
+--pypi-mirror <pypi_mirror>
+
+### Arguments
+
+PACKAGES 可选参数，包名
