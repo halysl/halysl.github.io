@@ -1,4 +1,12 @@
-# scrapy框架初使用及爬取LOL信息
+---
+layout: post
+title: scrapy框架初使用及爬取LOL信息
+categories: [Python, 爬虫]
+description: scrapy框架初使用及爬取LOL信息
+keywords: Python, 爬虫
+---
+
+# scrapy 框架初使用及爬取 LOL 信息
 
 ## 零、真前言
 
