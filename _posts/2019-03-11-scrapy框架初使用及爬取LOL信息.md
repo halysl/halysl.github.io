@@ -1,9 +1,9 @@
 ---
 layout: post
 title: scrapy框架初使用及爬取LOL信息
-categories: [Python, 爬虫]
+categories: [Python, 爬虫, 逃离CSDN]
 description: scrapy框架初使用及爬取LOL信息
-keywords: Python, 爬虫
+keywords: Python, 爬虫, 逃离CSDN
 ---
 
 # scrapy 框架初使用及爬取 LOL 信息
