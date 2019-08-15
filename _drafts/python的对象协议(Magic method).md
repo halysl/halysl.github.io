@@ -22,3 +22,6 @@ __getattribute__
 __getattr__
 __setattr__
 __delattr__
+
+
+传闻中，掌握了 Python 的魔术方法，就掌握了 Python 面向对象的一切。
