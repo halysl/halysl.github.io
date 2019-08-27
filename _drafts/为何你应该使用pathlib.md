@@ -1,0 +1,268 @@
+# [译]为什么你应该使用 pathlib
+
+**原文地址**: [Why you should be using pathlib](https://treyhunner.com/2018/12/why-you-should-be-using-pathlib/)
+
+当我刚知道 `pathlib` 的时候，我起初觉得它很不好用，因为已经有了 `os.path` 模块做相关的事，但后来证明我错了。`pathlib` 模块太酷了！
+
+在这篇文章里，我希望能鼓舞你在 Python代码中任何用到文件地方使用它。
+
+- [os.path 是笨拙的](#os_path)
+- [os 模块太拥挤了](#os)
+- [不要忘记 glob 模块](#glob)
+- [pathlib 让简单更简单](#pathlib)
+- [PATH 类型让你的代码更明确](#path)
+- [pathlib 还缺少了什么](#pathlib_missing)
+- [你应该使用 pathlib 吗](#pathlib_should)
+
+<span id="os_path"></span>
+## os.path 是笨拙的
+
+`os.path` 模块已经深入到了 Python 代码里面。你可以用这个模块做到自己想要的，但有时会显得很笨拙。
+
+你会喜欢下面这种？
+
+```python
+import os.path
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
+```
+
+还是喜欢下面这种？
+
+```python
+from os.path import abspath, dirname, join
+
+BASE_DIR = dirname(dirname(abspath(__file__)))
+TEMPLATES_DIR = join(BASE_DIR, 'templates')
+```
+
+或者你想对 join 函数重命名，那么就像是：
+
+```python
+from os.path import abspath, dirname, join as joinpath
+
+BASE_DIR = dirname(dirname(abspath(__file__)))
+TEMPLATES_DIR = joinpath(BASE_DIR, 'templates')
+```
+
+我觉得这有点不方便，我们将字符串传递给返回字符串的函数，然后我们将其传递给返回字符串的其他函数。 所有这些字符串恰好代表路径，但它们仍然只是字符串。
+
+os.path 模块里的这些 字符进-字符出 的函数在嵌套时非常难以处理，因为代码必须从里到外读取。如果我们可以将这些嵌套调用改为链式方法调用，那不是更好吗？
+
+用 pathlib 模块可以做到。
+
+```python
+from pathlib import Path
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+TEMPLATES_DIR = BASE_DIR.joinpath('templates')
+```
+
+os.path 模块要求嵌套使用，但是 pathlib 模块的 path 类声明的Path对象可以允许我们链式调用方法或者属性。
+
+我知道你在想什么：这些 Path 对象是一个对象而不是字符串。稍后我会进一步解释（注释：尽管它们也可以像字符串那样被使用）。
+
+<span id="os"></span>
+## os 模块太拥挤了
+
+Python 经典类 os.path 只能操作相关路径。如果你想操作一个路径（例如：创建一个目录），你需要使用其他的模块。
+
+os 模块有大量操作文件和目录的工具：`mkdir`,`getcwd`,`chmod`,`stat`, `remove`,`rename`, 还有`rmdir`。同时还有`chdir`, `link`, `walk`, `listdir`, `makedirs`, `renames`, `removedirs`, `unlink` (等同于 `remove`), 和 `symlink`。还有一堆和文件系统无关的东西：`fork`, `getenv`, `putenv`, `environ`, `getlogin`, 和 `system`。
+
+python 的 os 模块做了一些事情；它是一种与系统相关的东西的集合。os 模块有很多有意思的东西，但是当你需要找到一些路径相关的操作就需要挖掘下。
+
+pathlib 模块使用 Path 对象上的方法替换了许多与这些文件系统相关的 os 实用程序。
+
+下面是一些代码，它们创建了一个 src/\_\_pypackages__ 目录，并将我们的 .editorconfig 文件重命名为 src/.editorconfig。
+
+```python
+import os
+import os.path
+
+os.makedirs(os.path.join('src', '__pypackages__'), exist_ok=True)
+os.rename('.editorconfig', os.path.join('src', '.editorconfig'))
+```
+
+下面的代码通过 Path 对象实现：
+
+```python
+from pathlib import Path
+
+Path('src/__pypackages__').mkdir(parents=True, exist_ok=True)
+Path('.editorconfig').rename('src/.editorconfig')
+```
+
+注意这段代码里，路径在第一位，因为方法是链式调用的。
+
+os模块是一个非常大的命名空间，里面有很多东西。 pathlib.Path 类是一个比 os 模块小得多且更具体的命名空间。此 Path 命名空间中的方法返回 Path 对象，它允许方法链接而不是嵌套的 string-iful 函数调用。
+
+<span id="glob"></span>
+## 不要忘记 glob 模块]
+
+os 和 os.path 模块不是 Python 标准库中唯一与文件路径/文件系统相关的实用程序。glob 模块是另一个方便的路径相关模块。
+
+可以通过 glob.glob 方法查找精确的文件：
+
+```python
+from glob import glob
+
+top_level_csv_files = glob('*.csv')
+all_csv_files = glob('**/*.csv', recursive=True)
+```
+
+pathlib 模块也有类似的方法：
+
+```python
+from pathlib import Path
+
+top_level_csv_files = Path.cwd().glob('*.csv')
+all_csv_files = Path.cwd().rglob('*.csv')
+```
+
+<span id="pathlib"></span>
+## pathlib 让简单更简单
+
+pathlib模块使许多复杂的情况变得更简单，但它也使一些简单的情况更简单。
+
+需要读取一个或者多个文本文件？
+
+你可以使用 with 加上 open 函数实现文本内容的读取：
+
+```python
+from glob import glob
+
+file_contents = []
+for filename in glob('**/*.py', recursive=True):
+    with open(filename) as python_file:
+        file_contents.append(python_file.read())
+```
+
+或者你可以使用 Path 对象的 read_text 方法来实现，就像是：
+
+```python
+from pathlib import Path
+
+file_contents = [
+    path.read_text()
+    for path in Path.cwd().rglob('*.py')
+]
+```
+
+如果需要写入文件呢？
+
+```python
+with open('.editorconfig') as config:
+    config.write('# config goes here')
+
+Path('.editorconfig').write_text('# config goes here')
+```
+
+如果你更偏爱 open，那么可以：
+
+```python
+from pathlib import Path
+
+path = Path('.editorconfig')
+with path.open(mode='wt') as config:
+    config.write('# config goes here')
+```
+
+如果是 Python 3.6，你可以直接将 Path 对象作为参数给 open 函数：
+
+```python
+from pathlib import Path
+
+path = Path('.editorconfig')
+with open(path, mode='wt') as config:
+    config.write('# config goes here')
+```
+
+<span id="path"></span>
+## PATH 类型让你的代码更明确
+
+下面的三个变量都指代了什么？它们的值相当于什么？
+
+```python
+person = '{"name": "Trey Hunner", "location": "San Diego"}'
+pycon_2019 = "2019-05-01"
+home_directory = '/home/trey'
+```
+
+每一个变量都是字符串。
+
+但它们有不一样：一个是json数据，一个是日期，一个是文件路径。
+
+我们可以做一些小的变动使它们的指向更明确：
+
+```python
+from datetime import date
+from pathlib import Path
+
+person = {"name": "Trey Hunner", "location": "San Diego"}
+pycon_2019 = date(2019, 5, 1)
+home_directory = Path('/home/trey')
+```
+
+JSON对象反序列化为字典，日期使用datetime.date对象本地表示，文件系统路径现在可以使用pathlib.Path对象进行泛型表示。
+
+使用Path对象可以使您的代码更加清晰。如果您尝试表示日期，则可以使用日期对象。如果您尝试表示文件路径，则可以使用Path对象。
+
+感谢PEP 519，文件路径对象现在成为使用路径的标准。从Python 3.6开始，内置的open函数和os，shutil和os.path模块中的各种函数都可以与pathlib.Path对象一起正常工作。您可以立即开始使用pathlib，而无需更改大多数适用于路径的代码！
+
+<span id="pathlib_missing"></span>
+## pathlib 还缺少了什么
+
+尽管 pathlib 足够优秀，它也并不是十全十美的。它还缺少一些我想要的特性。
+
+我注意到的第一个差距是 pathlib.Path 对象缺少 shutil 等价物。
+
+虽然可以将 Path 对象当作字符串给 shutil 函数来操作，但 Path 对象本身不包含这些函数。
+
+因此要复制文件，您需要执行以下操作：
+
+```python
+from pathlib import Path
+from shutil import copyfile
+
+source = Path('old_file.txt')
+destination = Path('new_file.txt')
+copyfile(source, destination)
+```
+
+还没有与os.chdir等效的pathlib。
+
+这只是意味着如果您需要更改当前工作目录，则需要导入chdir：
+
+```python
+from pathlib import Path
+from os import chdir
+
+parent = Path('..')
+chdir(parent)
+```
+
+os.walk 函数也没有相应的 pathlib。 虽然你可以很容易地使用 pathlib 制作自己的类似遍历目录的函数。
+
+我希望 pathlib.Path 对象最终可能包含一些缺失操作的方法。但即使有这些缺失的功能，我仍然发现使用 pathlib 比 os.path 更易于管理。
+
+<span id="pathlib_should"></span>
+## 你应该使用 pathlib 吗
+
+从 Python 3.6 开始，pathlib.Path 对象几乎可以在您使用路径字符串的任何地方工作。 因此，如果您使用的是 Python 3.6（或更高版本），我认为没有理由不使用 pathlib。
+
+如果您使用的是 Python 3 的早期版本，则可以始终将您的 Path 对象包装在一个 str 调用中，以便在需要一个返回到字符串 land 的转义符号时从中获取一个字符串。 它很尴尬，但它有效：
+
+```python
+from os import chdir
+from pathlib import Path
+
+chdir(Path('/home/trey'))  # Works on Python 3.6+
+chdir(str(Path('/home/trey')))  # Works on earlier versions also
+```
+
+无论您使用的是哪个版本的 Python 3，我都建议您尝试使用 pathlib。
+
+如果你仍然坚持 Python 2（时钟正在滴答作响！）PyPI 上的第三方 pathlib2 模块是一个不错的方案，所以你可以在任何版本的 Python 上使用 pathlib。
+
+我发现使用 pathlib 经常使我的代码更具可读性。 我的大多数使用文件的代码现在默认使用 pathlib，我建议你也这样做。
