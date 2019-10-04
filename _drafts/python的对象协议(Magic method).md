@@ -107,6 +107,7 @@ Diabo will del...
 Eight will del...
 Use exit() or Ctrl-D (i.e. EOF) to exit
 ```
+
 ## 类型转换协议
 
 将对象类型进行转换的协议。
@@ -128,9 +129,19 @@ In [18]: type(c)
 Out[18]: float
 ```
 
-可以看到，通过 \_\_float__ 协议将 int 类型转成了 float 类型。
+可以看到，通过 `__float__` 协议将 int 类型转成了 float 类型。
 
-Python也有很多的魔术方法来实现类似 float() 的内置类型转换特性。 __int__(self) 实现整形的强制转换 __long__(self) 实现长整形的强制转换 __float__(self) 实现浮点型的强制转换 __complex__(self) 实现复数的强制转换 __oct__(self) 实现八进制的强制转换 __hex__(self) 实现二进制的强制转换 __index__(self) 当对象是被应用在切片表达式中时，实现整形强制转换，如果你定义了一个可能在切片时用到的定制的数值型,你应该定义 __index__ (详见PEP357) __trunc__(self) 当使用 math.trunc(self) 的时候被调用。 __trunc__ 应该返回数值被截取成整形(通常为长整形)的值 __coerce__(self, other) 实现混合模式算数。如果类型转换不可能的话，那么 __coerce__ 将会返回 None ,否则他将对 self 和 other 返回一个长度为2的tuple，两个为相同的类型。
+Python也有很多的魔术方法来实现类似 float() 的内置类型转换特性。 
+
+- `__int__(self)` 实现整形的强制转换
+- `__long__(self)` 实现长整形的强制转换
+- `__float__(self)` 实现浮点型的强制转换
+- `__complex__(self)` 实现复数的强制转换
+- `__oct__(self)` 实现八进制的强制转换
+- `__hex__(self)` 实现二进制的强制转换
+- `__index__(self)` 当对象是被应用在切片表达式中时，实现整形强制转换，如果你定义了一个可能在切片时用到的定制的数值型，你应该定义 `__index__` (详见PEP357) 
+- `__trunc__(self)` 当使用 math.trunc(self) 的时候被调用。 `__trunc__` 应该返回数值被截取成整形(通常为长整形)的值
+- `__coerce__(self, other)` 实现混合模式算数。如果类型转换不可能的话，那么`__coerce__` 将会返回 None ,否则他将对 self 和 other 返回一个长度为2的tuple，两个为相同的类型。
 
 ## 比较大小的协议
 
