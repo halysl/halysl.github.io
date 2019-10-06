@@ -1,17 +1,3 @@
-__dir__
-
-__str__
-__repr__
-
-__format__
-__doc__
-
-__getattribute__
-__getattr__
-__setattr__
-__delattr__
-
-
 # Python 的对象协议
 
 传闻中，掌握了 Python 的魔术方法，就掌握了 Python 面向对象的一切。可以说，面向对象的很多接口的实现靠的就是「对象协议」。说起来有点玄乎，实际操作起来就好了。
@@ -462,3 +448,30 @@ Not closable.
 
 ## 序列化协议
 
+比较少用到，主要是搭配 Pickle 使用。
+
+Pickle 并不是只支持内建数据结果，任何遵循 Pickle 协议的类都可以，Pickle 协议为 Python 对象规定了4个可选方法来自定义 Pickle 行为（对于 C 扩展的 cPickle 模块会有一些不同，但是这并不在我们的讨论范围内）：
+
+- `__getinitargs__(self)`：如果你希望在逆序列化的同时调用 `__init__` ，你可以定义 `__getinitargs__` 方法，这个方法应该返回一系列你想被 `__init__` 调用的参数，注意这个方法只对经典类起作用。
+- `__getnewargs__(self)`：对于新式的类，你可以定义任何在重建对象时候传递到 `__new__` 方法中的参数。这个方法也应该返回一系列的被 `__new__` 调用的参数。
+- `__getstate__(self)`：你可以自定义当对象被序列化时返回的状态，而不是使用 `__dict` 方法，当逆序列化对象的时候，返回的状态将会被 `__setstate__` 方法调用。
+- `__setstate__(self, state)`：在对象逆序列化的时候，如果 `__setstate__` 定义过的话，对象的状态将被传给它而不是传给 `__dict__` 。这个方法是和 `__getstate__` 配对的，当这两个方法都被定义的时候，你就可以完全控制整个序列化与逆序列化的过程了。
+
+## 类的表现协议
+
+如果有一个字符串来表示一个类将会非常有用。在 Python 中，有很多方法可以实现类定义内置的一些函数的返回值。 
+
+- `__str__(self)` 定义当 str() 调用的时候的返回值
+- `__repr__(self)` 定义 repr() 被调用的时候的返回值
+
+str() 和 repr() 的主要区别在于 repr() 返回的是机器可读的输出，而 str() 返回的是人类可读的。 
+
+- `__unicode__(self)` 定义当 unicode() 调用的时候的返回值。 unicode() 和 str() 很相似，但是返回的是unicode字符串。注意，如a果对你的类调用 str() 然而你只定义了 `__unicode__()` ，那么将不会工作。你应该定义 `__str__()` 来确保调用时能返回正确的值
+- `__hash__(self)` 定义当 hash() 调用的时候的返回值，它返回一个整形，用来在字典中进行快速比较
+
+# 参考资料
+
+- [Python 魔术方法指南](https://pycoders-weekly-chinese.readthedocs.io/en/latest/issue6/a-guide-to-pythons-magic-methods.html#id18)
+- [Python的对象协议](https://blog.51cto.com/11026142/1858863)
+- [python中的del用法](https://blog.csdn.net/windscloud/article/details/79732014)
+- [Python 内部：可调用对象是如何工作的](https://pycoders-weekly-chinese.readthedocs.io/en/latest/issue6/python-internals-how-callables-work.html)
