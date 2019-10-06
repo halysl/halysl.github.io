@@ -412,3 +412,7 @@ PACKAGES 可选参数，包名
 ### Arguments
 
 PACKAGES 可选参数，包名
+
+## 参考
+
+- [pipenv使用指南](https://crazygit.wiseturtles.com/2018/01/08/pipenv-tour/)
