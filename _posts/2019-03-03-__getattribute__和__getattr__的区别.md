@@ -6,11 +6,11 @@ description: __getattribute__ 和 __getattr__ 的区别
 keywords: Python
 ---
 
-# __getattribute__ 和 __getattr__ 的区别
+# `__getattribute__` 和 `__getattr__` 的区别
 
 这两个方法在外形上有点相似，但是差距不小，后面的 getattr() 和 setattr()、delattr()类似于Java里的 setter，getter。
 
-## __getattribute__ 是啥子
+## `__getattribute__` 是啥子
 
 \_\_getattribute__ 是新式类才出现的。
 
@@ -77,7 +77,7 @@ print(s1.num)
 
 如果 `__getattribute__` 没有定义好，这个问题会出现在很多地方，包括对象的内建方法或属性，比如  `__dict__`，所以这时候就推荐使用 `__getattr__`。
 
-## __getattr__ 是啥子
+## `__getattr__` 是啥子
 
 当访问某个实例属性时， `__getattribute__` 会被无条件调用。
 
