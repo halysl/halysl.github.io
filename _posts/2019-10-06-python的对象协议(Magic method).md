@@ -1,3 +1,11 @@
+---
+layout: post
+title: Python 的对象协议
+categories: [Python, 转载]
+description: Python 的对象协议
+keywords: Python, 转载
+---
+
 # Python 的对象协议
 
 传闻中，掌握了 Python 的魔术方法，就掌握了 Python 面向对象的一切。可以说，面向对象的很多接口的实现靠的就是「对象协议」。说起来有点玄乎，实际操作起来就好了。
