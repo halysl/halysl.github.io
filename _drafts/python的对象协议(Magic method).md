@@ -407,7 +407,58 @@ print(d.foot)
 
 ## 属性交互协议
 
+也就是 控制属性访问 相关的协议。
+
+- `__getattr__(self, name)` 你可以定义当用户试图获取一个不存在的属性时的行为。这适用于对普通拼写错误的获取和重定向，对获取一些不建议的属性时候给出警告(如果你愿意你也可以计算并且给出一个值)或者处理一个 AttributeError 。只有当调用不存在的属性的时候会被返回。然而，这不是一个封装的解决方案。 
+- `__setattr__(self, name, value)` 与 `__getattr__` 不同， `__setattr__` 是一个封装的解决方案。无论属性是否存在，它都允许你定义对对属性的赋值行为，以为这你可以对属性的值进行个性定制。但是你必须对使用 `__setattr__` 特别小心。之后我们会详细阐述。 - 
+- `__delattr__` 与 `__setattr__` 相同，但是功能是删除一个属性而不是设置他们。注意与 `__setattr__` 相同，防止无限递归现象发生。(在实现 `__delattr__` 的时候调用 `del self.name` 即会发生)
+- `__getattribute__(self, name)` `__getattribute__` 与它的同伴 `__setattr__` 和 `__delattr__` 配合非常好。但是我不建议使用它。只有在新类型类定义中才能使用 `__getattribute__` (这样你可以定义一个属性值的访问规则。有时也会产生一些递归现象。(这时候你可以调用基类的 `__getattribute__` 方法来防止此现象的发生。)它可以消除对 `__getattr__` 的使用，如果它被明确调用或者一个 AttributeError 被抛出，那么当实现 `__getattribute__` 之后才能被调用。此方法是否被使用其实最终取决于你的选择。)我不建议使用它因为它的使用几率较小(我们在取得一个值而不是设置一个值的时候有特殊的行为是非常罕见的。)而且它不能避免会出现bug。
+
+更多的区别可以看：[getattribute 和 getattr 的区别](https://halysl.github.io/2019/03/03/__getattribute__%E5%92%8C__getattr__%E7%9A%84%E5%8C%BA%E5%88%AB/)
+
 ## 上下文管理协议
+
+这个板块的协议作用比较大。
+
+上下文管理也称为会话管理，通过 `with` 语句块快速实现环境设置和环境清除，这依赖于 `__enter__` 和 `__exit__` 方法。
+
+- `__enter__(self)` 定义当使用 with 语句的时候会话管理器应该初始块被创建的时候的行为。注意 `__enter__` 的返回值被 with 语句的目标或者 as 后的名字绑定。 
+- `__exit__(self, exception_type, exception_value, traceback)` 定义当一个代码块被执行或者终止后会话管理器应该做什么。它可以被用来处理异常，清除工作或者做一些代码块执行完毕之后的日常工作。如果代码块执行成功， exception_type , exception_value , 和 traceback 将会是 None 。否则的话你可以选择处理这个异常或者是直接交给用户处理。如果你想处理这个异常的话，确认 `__exit__` 在所有结束之后会返回 True 。如果你想让异常被会话管理器处理的话，那么就这样处理。
+
+```python
+class Closer:
+'''通过with语句和一个close方法来关闭一个对象的会话管理器'''
+
+def __init__(self, obj):
+    self.obj = obj
+
+def __enter__(self):
+    return self.obj # bound to target
+
+def __exit__(self, exception_type, exception_val, trace):
+    try:
+        self.obj.close()
+    except AttributeError: # obj isn't closable
+        print 'Not closable.'
+        return True # exception handled successfully
+```
+
+```python
+>>> from magicmethods import Closer
+>>> from ftplib import FTP
+>>> with Closer(FTP('ftp.somesite.com')) as conn:
+...     conn.dir()
+...
+>>> conn.dir()
+>>> with Closer(int(5)) as i:
+...     i += 1
+...
+Not closable.
+>>> i
+6
+```
+
+上下文管理器属于比较重要的模块，也非常容易实现，最简单的实现方案莫过于 `contextmanager + yield`，更多的内容可以参考[谈一谈Python的上下文管理器](http://www.bjhee.com/python-context.html)。
 
 ## 序列化协议
 
