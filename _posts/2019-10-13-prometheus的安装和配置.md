@@ -1,3 +1,11 @@
+---
+layout: post
+title: prometheus 的安装和配置
+categories: [prometheus]
+description: prometheus 的安装和配置
+keywords: prometheus
+---
+
 # prometheus 的安装和配置
 
 Prometheus 是一个开放性的监控解决方案，用户可以非常方便的安装和使用 Prometheus 并且能够非常方便的对其进行扩展。为了能够更加直观的了解 Prometheus Server，接下来我们将在本地部署并运行一个 Prometheus Server实例，通过 Node Exporter 采集当前主机的系统资源使用情况。 并通过 Grafana 创建一个简单的可视化仪表盘。
