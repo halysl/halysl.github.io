@@ -138,12 +138,13 @@ set -x
 ```shell
 $ bash -x strtst.sh 
 ```
+## Git
+
+- [git-quick-stats:快速查看git统计信息](https://github.com/arzzen/git-quick-stats#macos-homebrew)
 
 ## 杂项
-### [base64加解密](https://www.bejson.com/enc/base64/)
 
-### [Shell脚本编程30分钟入门](https://github.com/qinjx/30min_guides/blob/master/shell.md)
-
-### [json校验](https://www.bejson.com/)
-
-### [在线正则表达式测试](http://tool.oschina.net/regex)
+- [base64加解密](https://www.bejson.com/enc/base64/)
+- [Shell脚本编程30分钟入门](https://github.com/qinjx/30min_guides/blob/master/shell.md)
+- [json校验](https://www.bejson.com/)
+- [在线正则表达式测试](http://tool.oschina.net/regex)
