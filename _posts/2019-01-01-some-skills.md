@@ -141,6 +141,8 @@ $ bash -x strtst.sh
 ## Git
 
 - [git-quick-stats:快速查看git统计信息](https://github.com/arzzen/git-quick-stats#macos-homebrew)
+- [gitstats:生成图表（丑）](https://github.com/hoxu/gitstats)
+- [gitinspector:生成图表（帅）](https://github.com/ejwa/gitinspector)
 
 ## 杂项
 
