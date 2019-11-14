@@ -42,7 +42,7 @@ c、点击 Add SSH key 按钮添加一个 SSH key 。把你复制的 SSH key 代
 
 将以下配置项复制到 config 文件中。
 
-```
+```txt
 Host github.com
 HostName github.com
 IdentityFile ~/.ssh/id_rsa_github
@@ -52,13 +52,13 @@ IdentityFile ~/.ssh/id_rsa_github
 
 ## 测试
 
-```
+```sh
 ssh -T git@github.com
 ```
 
 当你输入以上代码时，会有一段警告代码，如：
 
-```
+```sh
 The authenticity of host 'github.com (207.97.227.239)' can't be established.
 # RSA key fingerprint is 16:27:ac:a5:76:28:2d:36:63:1b:56:4d:eb:df:a6:48.
 # Are you sure you want to continue connecting (yes/no)?
@@ -66,11 +66,46 @@ The authenticity of host 'github.com (207.97.227.239)' can't be established.
 
 这是正常的，你输入 yes 回车既可。
 
-```
+```sh
 Hi username! You've successfully authenticated, but GitHub does not
 # provide shell access.
 ```
 
 如果用户名是正确的,你已经成功设置SSH密钥。
 
-## 
+## 快速配置仓库的 git 信息
+
+
+```sh
+function github() {
+git config user.name "xxxx yyyy"
+git config user.email "xyz@gmail.com"
+}
+
+function gitlab() {
+git config user.name "aaaa bbbb"
+git config user.email "aaabbb@test.com"
+}
+
+
+if test -z $1
+then
+    echo '无操作'
+elif [ $1 == github ]
+then
+    github
+    echo '当前仓库已配置 github 的用户信息'
+    git config user.name
+    git config user.email
+elif [ $1 == gitlab ]
+then
+    gitlab
+    echo '当前仓库已配置gitlab的用户信息'
+    git config user.name
+    git config user.email
+else
+    echo '误操作'
+fi
+```
+
+将脚本保存为 `set_git.sh`，放到 `/usr/local/bin` 目录下，通过 `set_git github` 或者 `set_git gitlab` 使用，快速切换当前 git 仓库的git信息。
