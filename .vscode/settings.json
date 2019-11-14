@@ -1,3 +1,5 @@
 {
-    "python.pythonPath": "/Users/light/open_code/python_module_study_code/.venv/bin/python"
+    "python.pythonPath": "/usr/local/bin/python3",
+    "python.linting.pylintEnabled": true,
+    "python.linting.enabled": true
 }
