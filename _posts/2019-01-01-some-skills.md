@@ -87,6 +87,13 @@ $ resize [-cu][-s <列数> <行数>]
 >>> print(res.lines, res.columns)  # 输出终端的高度和宽度
 ```
 
+### 查看内核版本和发行版本
+
+```shell
+$ uname -a # 内核版本
+$ cat /etc/redhat-release # 查看 Redhat 发行版
+$ cat /etc/issue # 查看 Ubuntu 发行版
+```
 ## vi
 [vi块操作](https://blog.csdn.net/sinat_36053757/article/details/78183506)
 ### 多行选中并在开头加字符
