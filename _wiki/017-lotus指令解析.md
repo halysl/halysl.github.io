@@ -1,3 +1,11 @@
+---
+layout: wiki
+title: Lotus 指令解析
+categories: [go, blockchain]
+description: 
+keywords: go, blockchain
+---
+
 # Lotus 指令解析
 
 ## lotus
@@ -301,25 +309,24 @@ VERSION:
    0.7.0
 
 COMMANDS:
-     run               Start a lotus storage miner process
-     init              Initialize a lotus storage miner repo
-     info              Print storage miner info
-     store-garbage     store random data in a sector
-     sectors           interact with sector store
-     auth              Manage RPC permissions
-     chain             Interact with filecoin blockchain
-     client            Make deals, store data, retrieve data
-     createminer       Create a new storage market actor
-     fetch-params      Fetch proving parameters
-     mpool             Manage message pool
-     net               Manage P2P Network
-     paych             Manage payment channels
-     send              Send funds between accounts
-     state             Interact with and query filecoin chain state
-     sync              Inspect or interact with the chain syncer
-     unregister-miner  Manually unregister miner actor
-     version           Print version
-     wallet            Manage wallet
+     run               运行一个矿工程序
+     init              初始化一个矿工
+     info              打印矿工信息
+     store-garbage     在一个块中存储随机数据
+     sectors           查看块的信息
+     auth              RPC 权限管理
+     chain             filecoin 链上管理
+     client            处理交易、存储数据、检索数据
+     createminer       创建存储市场矿工
+     fetch-params      获得证明参数
+     mpool             信息池管理
+     net               P2P 网络管理
+     paych             报酬支付管理
+     send              账户间转账
+     state             询问 filecoin 链上状态
+     sync              同步数据
+     version           打印版本
+     wallet            钱包管理
      help, h           Shows a list of commands or help for one command
 
 GLOBAL OPTIONS:
@@ -327,4 +334,55 @@ GLOBAL OPTIONS:
    --help, -h           show help (default: false)
    --version, -v        print the version (default: false)
    ```
-   
+
+### lotus-storage-miner run
+
+```sh
+NAME:
+   lotus-storage-miner run - Start a lotus storage miner process
+
+USAGE:
+   lotus-storage-miner run [command options] [arguments...]
+
+OPTIONS:
+   --api 数值
+   --enable-gpu-proving  是否应用 GPU 挖矿 (default: true)
+```
+
+### lotus-storage-miner init
+
+```sh
+NAME:
+   lotus-storage-miner init - Initialize a lotus storage miner repo
+
+USAGE:
+   lotus-storage-miner init [command options] [arguments...]
+
+OPTIONS:
+   --actor value             特别制定一个已经创建好的矿工角色(默认不使用)
+   --create-worker-key       创建一个单独的工人号(默认：关)
+   --worker value, -w value  制定一个工人号
+   --owner value, -o value   拥有者号(指钱包id)
+   --sector-size value       制定区块大小 (默认: 16777216 B)
+```
+
+`lotus-storage-miner init --owner $WALLET-ID --sector-size 16777216`：初始化一个区块为 16 MiB 的矿工。
+
+### lotus-storage-miner sectors
+
+查看块的信息。
+
+```sh
+NAME:
+   lotus-storage-miner sectors - interact with sector store
+
+USAGE:
+   lotus-storage-miner sectors command [command options] [arguments...]
+
+COMMANDS:
+     status   通过指定 sectors id 来查看状态
+     list     列出所有的扇区
+     refs     列出扇区的参照
+```
+
+`lotus-storage-miner sectors status $SECTORS-ID`：查看对应 sectors id 的状态
