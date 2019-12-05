@@ -94,6 +94,11 @@ $ uname -a # 内核版本
 $ cat /etc/redhat-release # 查看 Redhat 发行版
 $ cat /etc/issue # 查看 Ubuntu 发行版
 ```
+
+### 在 Ubuntu 中使用 NTP 进行时间同步
+
+https://linux.cn/article-8091-1.html
+
 ## vi
 [vi块操作](https://blog.csdn.net/sinat_36053757/article/details/78183506)
 ### 多行选中并在开头加字符

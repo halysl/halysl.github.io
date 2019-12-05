@@ -12,3 +12,5 @@ keywords: go, Skill
 
 - [Go 切片：用法和本质](https://blog.go-zh.org/go-slices-usage-and-internals)
 - [Linux下Go的安装、配置 、升级和卸载](https://www.jianshu.com/p/f2a237de8f07)
+- [理解go的function types](https://www.jianshu.com/p/fc4902159cf5)
+- [Golang必备技巧：接口型函数](https://www.flysnow.org/2016/12/30/golang-function-interface.html)
