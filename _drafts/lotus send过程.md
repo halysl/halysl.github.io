@@ -35,10 +35,17 @@ lotus send 可以在钱包间转账。
 
 - 如果指定了 source 信息，则类似 计算对方钱包位置 一样计算一个钱包地址
 - 如果没有指定，则使用 api 的 WalletDefaultAddress 方法实现
+- 通过 ~/.lotus/keystore 里的文件进行查询
 
 ## 将转账信息记录到 mpool 里
 
 - 构建一个 message 结构，目前 GasLimit 和 GasPrice 都是固定的
 - 使用 api 的 MpoolPushMessage 方法实现
+  - 通过 message 进行处理，判断余额是否足够传递
+  - 通过 mp.getNonceLocked 拿到 nonce
+  - 将 nonce 加入到 message里，对 message 的每一项数据根据类型进行不同处理，将结果写入到buffer，记为data，然后根据data生成一个cid，这两个参数通过 block.NewBlockWithCid 获取新块
+  - 通过 message 的 from address 和 cid 信息，创建签名文件
+  - 通过 PubSubPublish 进行数据传递
+- 数据传递过程
 
 问题：api 到底是个什么东西
