@@ -14,3 +14,5 @@ keywords: go, Skill
 - [Linux下Go的安装、配置 、升级和卸载](https://www.jianshu.com/p/f2a237de8f07)
 - [理解go的function types](https://www.jianshu.com/p/fc4902159cf5)
 - [Golang必备技巧：接口型函数](https://www.flysnow.org/2016/12/30/golang-function-interface.html)
+- [Go 语言“可变参数函数”终极指南](https://studygolang.com/articles/11965)
+- [深入理解Golang之channel](https://juejin.im/post/5decff136fb9a016544bce67?utm_source=gold_browser_extension#heading-19)
