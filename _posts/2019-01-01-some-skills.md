@@ -99,6 +99,13 @@ $ cat /etc/issue # 查看 Ubuntu 发行版
 
 https://linux.cn/article-8091-1.html
 
+### Kill User Session
+
+```shell
+$ sudo pkill -9 -u username
+$ ps -fp $(pgrep -d, -u userNameHere)
+```
+
 ## vi
 [vi块操作](https://blog.csdn.net/sinat_36053757/article/details/78183506)
 ### 多行选中并在开头加字符

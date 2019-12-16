@@ -16,3 +16,4 @@ keywords: go, Skill
 - [Golang必备技巧：接口型函数](https://www.flysnow.org/2016/12/30/golang-function-interface.html)
 - [Go 语言“可变参数函数”终极指南](https://studygolang.com/articles/11965)
 - [深入理解Golang之channel](https://juejin.im/post/5decff136fb9a016544bce67?utm_source=gold_browser_extension#heading-19)
+- [Go语言实战笔记（十八）| Go log 日志](https://www.flysnow.org/2017/05/06/go-in-action-go-log.html)

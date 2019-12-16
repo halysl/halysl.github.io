@@ -10,14 +10,14 @@ keywords: Homebrew， 软件管理
 
 ## 说明
 
-Mac的软件包管理工具，类似于linux的apt-get，能在mac中方便地安装软件或者卸载软件。
+Mac 的软件包管理工具，类似于 linux 的 apt-get，能在 mac 中方便地安装软件或者卸载软件。
 
 ## 安装及卸载
 
-1. Homebrew依赖xcode和其Command Line Tools。
+1. Homebrew 依赖 xcode 和其 Command Line Tools。
 
-    - 在App Store中安装最新版本的xcode；
-    - 执行xcode-select --install安装Command Line Tools。
+    - 在 App Store 中安装最新版本的 xcode；
+    - 执行 xcode-select --install 安装 Command Line Tools。
 
 2. 安装
 
@@ -35,10 +35,10 @@ ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/
 
 |指令|说明|示例|
 |---|----|---|
-|brew update|更新Homebrew|brew update|
+|brew update|更新 Homebrew|brew update|
 |brew list|显示已安装的软件|brew list|
 |brew info|显示安装了包的数量、文件数量和总占用空间|brew info|
-|brew info 软件名|显示某个包的信息，包括版本、git仓库、最近的安装情况分析|brew info git|
+|brew info 软件名|显示某个包的信息，包括版本、git 仓库、最近的安装情况分析|brew info git|
 |brew deps 软件名|显示某个包的依赖关系|brew deps git|
 |brew deps --installed --tree|查看已安装的包的依赖，树形显示|brew deps --installed --tree|
 |brew install 软件名|安装软件|brew install git|
@@ -52,5 +52,5 @@ ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/
 |brew cleanup|清除所有软件包的所有老版本|brew cleanup|
 |brew pin 软件名|锁定指定的软件包|brew pin git|
 |brew unpin 软件名|解锁指定的软件包|brew unpin git|
-|brew prune|清理无用的symlink，且清理与之相关的位于/Applications和~/Applications中的无用App链接|brew prune|
-|brew link 软件名|将指定软件的安装文件symlink到Homebrew上，默认通过brew install安装的包这步自动执行|brew link git|
+|brew prune|清理无用的 symlink，且清理与之相关的位于 /Applications 和 ~/Applications 中的无用 App 链接|brew prune|
+|brew link 软件名|将指定软件的安装文件 symlink 到 Homebrew 上，默认通过 brew install 安装的包这步自动执行|brew link git|
