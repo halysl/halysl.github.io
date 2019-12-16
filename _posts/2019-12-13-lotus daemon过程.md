@@ -1,3 +1,11 @@
+---
+layout: post
+title: Lotus daemon 全过程
+categories: [Go, Lotus, 区块链]
+description: 
+keywords: 
+---
+
 # Lotus daemon 全过程
 
 `lotus daemon` 会生成一个守护进程，那么它在这个过程中做了哪些事？
@@ -5,7 +13,7 @@
 ## 大致过程
 
 - 通过命令行读取参数
-- 拿到指定的repo或者使用默认的repo(就是一个路径值)，计作 $PATH，根据它进行服务初始化的操作
+- 拿到指定的 repo 或者使用默认的 repo(就是一个路径值)，计作 $PATH，根据它进行服务初始化的操作
   - 根据是否存在 $PATH/datastore，判断是否已经运行过服务，如果运行过就报警告，否则创建 $PATH 目录
   - 创建默认的 $PATH/config.toml 文件
   - 创建 $PATH/keystore 文件夹

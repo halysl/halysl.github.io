@@ -1,3 +1,11 @@
+---
+layout: post
+title: Lotus send 全过程
+categories: [Go, Lotus, 区块链]
+description: 
+keywords: 
+---
+
 # Lotus send 全过程
 
 lotus send 可以在钱包间转账。
@@ -47,5 +55,3 @@ lotus send 可以在钱包间转账。
   - 通过 message 的 from address 和 cid 信息，创建签名文件
   - 通过 PubSubPublish 进行数据传递
 - 数据传递过程
-
-问题：api 到底是个什么东西
