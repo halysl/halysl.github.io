@@ -1,12 +1,12 @@
 ---
 layout: post
-title: 【转】Mac 上制作 Linux 系统 U 盘安装盘
+title: 【转载】Mac 上制作 Linux 系统 U 盘安装盘
 categories: [Linux, MacOS]
 description: Mac 上制作 Linux 系统 U 盘安装盘
 keywords: 
 ---
 
-# 【转】Mac 上制作 Linux 系统 U 盘安装盘
+# 【转载】Mac 上制作 Linux 系统 U 盘安装盘
 
 Mac 下将 iso 镜像写入 U 盘可使用命令行工具 dd，操作如下：
 

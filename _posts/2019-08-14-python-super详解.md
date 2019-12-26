@@ -1,12 +1,12 @@
 ---
 layout: post
-title: Python-super 没那么简单
+title: 【转载】Python-super 没那么简单
 categories: [Python, 转载]
 description: Python-super 没那么简单
 keywords: Python, 转载
 ---
 
-# 【转】Python: super 没那么简单
+# 【转载】Python: super 没那么简单
 
 ## 转载信息
 

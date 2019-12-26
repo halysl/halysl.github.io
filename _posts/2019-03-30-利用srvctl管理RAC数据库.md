@@ -1,12 +1,12 @@
 ---
 layout: post
-title: 转载-利用srvctl管理RAC数据库
+title: 【转载】利用srvctl管理RAC数据库
 categories: [Oracle]
 description: 
 keywords: Oracle, 转载， RAC
 ---
 
-# 【转】利用 srvctl 管理 RAC 数据库
+# 【转载】利用 srvctl 管理 RAC 数据库
 
 srvctl 即 Server Control，是 Oracle 提供的一个命令行工具，用以用于管理 Oracle 的 RAC 环境。srvctl 在 Oracle 9i 中被引入，Oracle10g、11g 对其功能进行了很大的增强和改进。下面介绍下此命令的简单用法。
 

@@ -1,12 +1,12 @@
 ---
 layout: post
-title: 【转】Linux 之三剑客，awk、sed、grep的用法
+title: 【转载】Linux 之三剑客，awk、sed、grep的用法
 categories: [Linux]
 description: Linux 下的字符处理
 keywords: Linux, awk, sed, grep
 ---
 
-#【转】Linux 之三剑客，awk、sed、grep的用法
+#【转载】Linux 之三剑客，awk、sed、grep的用法
 
 例如要在 Linux 的进程中找到和 python 有关的进程，那么最简单的方法就是 `ps -aux|grep python|grep -v grep`，例如只想打印所有信息的 `USER` `PID` `COMMAND`这三项，那么就可以用 awk 实现 `ps -aux|grep python|grep -v grep| awk '{print $1,$2,$NF}'`。sed 用的不多，这三者可以合称为 Linux 字符处理三剑客。
 

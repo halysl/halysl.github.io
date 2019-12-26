@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Supervisord 的使用
+title: 【转载】Supervisord 的使用
 categories: [Linux, Ubuntu, Supervisord]
 description:
 keywords: 
