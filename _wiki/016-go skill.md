@@ -17,3 +17,5 @@ keywords: go, Skill
 - [Go 语言“可变参数函数”终极指南](https://studygolang.com/articles/11965)
 - [深入理解Golang之channel](https://juejin.im/post/5decff136fb9a016544bce67?utm_source=gold_browser_extension#heading-19)
 - [Go语言实战笔记（十八）| Go log 日志](https://www.flysnow.org/2017/05/06/go-in-action-go-log.html)
+- [Golang 中使用 JSON 的小技巧](https://colobu.com/2017/06/21/json-tricks-in-Go/)
+- [错误和异常](https://chai2010.cn/advanced-go-programming-book/ch1-basic/ch1-07-error-and-panic.html)
