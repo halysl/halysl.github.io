@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 【转载】Linux Locale 设置
+title: 【转载】Linux Useradd 命令基本用法
 categories: [Linux]
 description:
 keywords: 
