@@ -77,3 +77,7 @@ export LC_ALL=zh_CN.utf8
 ```sh
 echo "export LC_ALL=zh_CN.utf8">> /etc/profile 
 ```
+
+## 转载信息
+
+原始转载信息已不可查，转载链接为 https://blog.csdn.net/hunanchenxingyu/article/details/37542271。
