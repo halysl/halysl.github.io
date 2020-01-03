@@ -106,7 +106,19 @@ $ sudo pkill -9 -u username
 $ ps -fp $(pgrep -d, -u userNameHere)
 ```
 
+### 产生随机字符
+
+```shell
+val=`cat /dev/urandom | head -n 10 | md5 | head -c 10`
+echo $val
+
+echo  `/bin/date`
+
+echo $RANDOM
+```
+
 ## vi
+
 [vi块操作](https://blog.csdn.net/sinat_36053757/article/details/78183506)
 ### 多行选中并在开头加字符
 ```vi
