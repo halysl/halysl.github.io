@@ -234,3 +234,4 @@ TOTAL:                 3.53GB            694Mb                                  
 - [深入浅出多网卡绑定技术](https://blog.51cto.com/alanwu/1095566)
 - [网卡bonding模式 - bond0、1、4配置](https://www.cnblogs.com/kaishirenshi/p/10245228.html)
 - [linux——如何添加网卡做bond5聚合？](https://blog.51cto.com/13859004/2144578)
+- [Linux Bonding](https://www.learnfuture.com/InnerSite/ArticleContent?code=6524)
