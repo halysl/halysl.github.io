@@ -176,9 +176,12 @@ port=0.0.0.0:9001          ; (ip_address:port specifier, *:port for all iface)
 username=user              ; (default is no username (open server))
 password=123               ; (default is no password (open server))
 ```
+
 - port：绑定访问IP和端口，这里是绑定的是本地IP和9001端口
 - username：登录管理后台的用户名
 - password：登录管理后台的密码
+
+> 如果想配置 node_exporter 里监控 supervisord 服务状态，那么需要根据 username，password 指定 collector.supervisord.url 参数，或者直接注释 username，password
 
 ## 开机启动 Supervisor 服务
 
