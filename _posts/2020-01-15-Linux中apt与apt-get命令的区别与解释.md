@@ -1,13 +1,13 @@
 ---
 layout: post
-title: Linux 中 apt 与 apt-get 命令的区别与解释
-categories: [Linux]
+title: 【转载】Linux 中 apt 与 apt-get 命令的区别与解释
+categories: [Linux, 转载]
 description:
 keywords: 
 ---
 
 
-# Linux 中 apt 与 apt-get 命令的区别与解释
+# 【转载】Linux 中 apt 与 apt-get 命令的区别与解释
 
 Ubuntu 16.04 发布时，一个引人注目的新特性便是 apt 命令的引入。其实早在 2014 年，apt 命令就已经发布了第一个稳定版，只是直到 2016 年的 Ubuntu 16.04 系统发布时才开始引人关注。
 

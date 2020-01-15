@@ -1,12 +1,12 @@
 ---
 layout: post
 title: 【转载】Linux Locale 设置
-categories: [Linux]
+categories: [Linux, 转载]
 description:
 keywords: 
 ---
 
-# [转载]Linux Locale 设置
+# 【转载】Linux Locale 设置
 
 说明： Locale是根据计算机用户所使用的语言，所在国家或者地区，以及当地的文化传统所定义的一个软件运行时的语言环境。
 

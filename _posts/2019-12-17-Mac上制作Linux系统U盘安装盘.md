@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 【转载】Mac 上制作 Linux 系统 U 盘安装盘
-categories: [Linux, MacOS]
+categories: [Linux, MacOS, 转载]
 description: Mac 上制作 Linux 系统 U 盘安装盘
 keywords: 
 ---
@@ -63,3 +63,8 @@ sudo pv -cN source < /Users/kacperwang/Downloads/CentOS-7-x86_64-Everything-1511
 $ diskutil eject /dev/disk2
 Disk /dev/disk2 ejected
 ```
+
+## 转载信息
+
+- 作者：jaywcjlove
+- 链接：[Mac上制作linux系统U盘安装盘](https://github.com/jaywcjlove/handbook/blob/master/CentOS/Mac%E4%B8%8B%E5%88%B6%E4%BD%9CCentOS7%E5%90%AF%E5%8A%A8%E7%9B%98.md)

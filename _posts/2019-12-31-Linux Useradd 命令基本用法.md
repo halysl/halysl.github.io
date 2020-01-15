@@ -1,12 +1,12 @@
 ---
 layout: post
 title: 【转载】Linux Useradd 命令基本用法
-categories: [Linux]
+categories: [Linux, 转载]
 description:
 keywords: 
 ---
 
-# [转载]Linux Useradd 命令基本用法
+# 【转载】Linux Useradd 命令基本用法
 
 在 Linux 中 useradd 是个很基本的命令，但是使用起来却很不直观。以至于在 Ubuntu 中居然添加了一个 adduser 命令来简化添加用户的操作。本文主要描述笔者在学习使用 useradd 命令时的一些测试结果。
 
