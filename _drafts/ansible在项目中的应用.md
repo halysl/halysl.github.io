@@ -1,0 +1,1 @@
+使用 python3，即 `-e ansible_python_interpreter=/usr/bin/python3`
