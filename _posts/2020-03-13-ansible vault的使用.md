@@ -1,6 +1,6 @@
 ---
 layout: post
-title: [ansible vault 的使用]
+title: ansible vault 的使用
 categories: [Linux, 运维, ansible]
 description:
 keywords: 
