@@ -24,13 +24,13 @@ hello.yml
 
 ## 模块说明
 
-create: 创建一个新文件，并直接对其进行加密
-decrypt: 解密文件
-edit: 用于编辑 ansible-vault 加密过的文件
-encrypy: 加密文件
-encrypt_strin: 加密字符串，字符串从命令行获取
-view: 查看经过加密的文件
-rekey: 重新设置密码
+- create: 创建一个新文件，并直接对其进行加密
+- decrypt: 解密文件
+- edit: 用于编辑 ansible-vault 加密过的文件
+- encrypy: 加密文件
+- encrypt_strin: 加密字符串，字符串从命令行获取
+- view: 查看经过加密的文件
+- rekey: 重新设置密码
 
 每个模块都很容易理解。
 
