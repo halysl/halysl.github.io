@@ -62,3 +62,5 @@ echo is /bin/echo
 shell 内建命令是指 bash（或其它版本）工具集中的命令。一般都会有一个与之同名的系统命令，比如 bash 中的 echo 命令与 /bin/echo 是两个不同的命令，尽管他们行为大体相仿。当在 bash 中键入一个命令时系统会先看他是否是一个内建命令，如果不是才会查看是否是系统命令或第三方工具。所以在 bash 中键入 echo 命令实际上执行 bash 工具集中的 echo 命令也就是内建命令，而不是 /bin/echo 这个系统命令。
 
 内建命令要比系统论命令有比较高的执行效率。外部命令执行时往往需要fork出（产生出）一个子进程，而内建命令一般不用。
+
+> 扩展：[Shell Builtin Commands](https://www.gnu.org/software/bash/manual/html_node/Shell-Builtin-Commands.html)
