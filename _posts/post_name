@@ -90,11 +90,33 @@
 2019-12-31-Linux Useradd 命令基本用法.md
 2020-01-07-IBM x3650 m4服务器电口网卡问题.md
 2020-01-08-Linux bond 配置.md
-2020-01-08-MySQL的 JSON 类型.md
+2020-01-08-MySQL 的 JSON 类型.md
 2020-01-10-ip 命令解析.md
 2020-01-11-arp 实现网络传输速率倍增.md
 2020-01-14-iftop的使用.md
 2020-01-15-Linux中apt与apt-get命令的区别与解释.md
-2020-01-15-ubuntu使用光纤设备遇到的问题.md
+2020-01-15-Ubuntu 使用光纤设备遇到的问题.md
+2020-01-15-Ubuntu 安装 ftp 服务.md
+2020-02-14-新冠肺炎记忆.md
+2020-03-04-oracle数据库基础概念.md
+2020-03-04-杀死一个进程和它的后代.md
+2020-03-11-ansible基本操作及应用.md
+2020-03-13-ansible vault的使用.md
+2020-03-17-apt遇到gpg error：pub key not found问题.md
+2020-03-19-Make 命令使用.md
+2020-03-27-更新Node.js.md
+2020-03-30-Linux 目录解释.md
+2020-03-31-Linux 磁盘相关操作.md
+2020-04-01-systemd的使用.md
+2020-04-02-Login shell 和 Non-Login shell 的区别.md
+2020-04-02-ansible运行持续进程及配置环境变量.md
+2020-04-02-bash shell内建命令.md
+2020-04-09-ansible优化.md
+2020-04-09-iptables 常用策略.md
+2020-04-10-openVPN实践.md
+2020-04-17-关于磁盘及fs的几个问题处理.md
+2020-04-23-OMM Killer 机制.md
+2020-05-06-Ubuntu修改时区和更新时间.md
+2020-05-06-cobbler服务在docker下运行.md
 
-总计有98篇文章
+总计有120篇文章
