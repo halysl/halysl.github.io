@@ -117,6 +117,57 @@ echo  `/bin/date`
 echo $RANDOM
 ```
 
+### grep 常用匹配
+
+```shell
+# 过滤空行和注释行
+grep -Ev "^$|[#;]" server.conf
+
+# 匹配文件中所有单词,并打印出来
+## [[:alpha:]]表示字母
+## [[:alpha:]]+表示多个字母
+## \b表示边界，其前后必须是不同类型的字符
+## \b[[:alpha:]]+\b合起来表示一个单词
+grep -E -o "\b[[:alpha:]]+\b" server.conf
+
+# 列出目录下包含关键字的文件
+grep -lr "mysql"  /etc/
+
+# 列出目录下包含关键字的文件，并显示文件中包含关键字的行
+grep -Ir "mysql"  /etc/
+```
+
+### shell 的数组遍历
+
+```shell
+# 标准的for循环
+for(( i=0;i<${#array[@]};i++)) do
+echo ${array[i]};
+done;
+
+# for in 遍历（不带数组下标）
+for element in ${array[@]}
+do
+echo $element
+done
+
+# for in 遍历（带数组下标）
+for i in "${!arr[@]}";   
+do   
+    printf "%s\t%s\n" "$i" "${arr[$i]}"  
+done  
+
+# while 循环
+i=0
+while [ $i -lt ${#array[@]} ]  
+#当变量（下标）小于数组长度时进入循环体
+do  
+    echo ${ array[$i] }  
+    #按下标打印数组元素
+    let i++  
+done  
+```
+
 ## vi
 
 [vi块操作](https://blog.csdn.net/sinat_36053757/article/details/78183506)
