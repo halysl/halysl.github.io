@@ -10,7 +10,7 @@ keywords:
 
 [Difference between Login shell and Non login shell](http://howtolamp.com/articles/difference-between-login-and-non-login-shell#login)
 
-shell 程序，例如 Bash，使用了一系列启动脚本去创建环境。每一个脚本有独特的作用，对登陆环境有不同的影响。后续执行的脚本的可以覆盖先前执行的急哦啊笨产生的值。
+shell 程序，例如 Bash，使用了一系列启动脚本去创建环境。每一个脚本有独特的作用，对登陆环境有不同的影响。后续执行的脚本的可以覆盖先前执行的脚本产生的值。
 
 对于登录Shell和非登录Shell，启动配置有所不同。
 
